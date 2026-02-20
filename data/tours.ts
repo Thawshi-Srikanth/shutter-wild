@@ -1,0 +1,483 @@
+export type Tour = {
+  id: string;
+  title: string;
+  slug: string;
+  date: string;
+  location: string;
+  maxPhotographers: number;
+  price: string;
+  duration: string;
+  overview: string;
+  focusSpecies: string[];
+  itinerary: { day: string; title: string; description: string }[];
+  included: string[];
+  notIncluded: string[];
+  equipment: string[];
+  image: string;
+};
+
+export const tours: Tour[] = [
+  {
+    id: "norway-winter-raptors-2027",
+    title: "Norway Winter Raptors Expedition",
+    slug: "norway-winter-raptors",
+    date: "15–20 February 2027",
+    location: "Norway",
+    maxPhotographers: 3,
+    price: "£1,750 per person",
+    duration: "6 Days | 5 Nights",
+    overview:
+      "Winter strips the landscape back to its purest form. Snow absorbs sound. Light becomes softer. Movement becomes deliberate. In this quiet Scandinavian wilderness, Golden Eagles and Northern Goshawks descend through the trees with power and precision. This expedition is exclusively limited to three photographers to ensure freedom of movement inside the hide, cleaner shooting angles, reduced disturbance, and personal guidance.",
+    focusSpecies: [
+      "Golden Eagle",
+      "Northern Goshawk",
+      "Ravens",
+      "White-throated Dipper",
+      "Winter woodland species",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "15 February | Arrival",
+        description:
+          "Arrival and welcome briefing. Detailed logistics provided upon booking.",
+      },
+      {
+        day: "Days 2-5",
+        title: "16–19 February | Hide Days",
+        description:
+          "Four full days of hide-based raptor photography in two carefully positioned hides.",
+      },
+      {
+        day: "Day 6",
+        title: "20 February | Departure",
+        description:
+          "Morning woodland exploration for White-throated Dippers. Afternoon departures.",
+      },
+    ],
+    included: [
+      "Five nights accommodation",
+      "All meals (Dinner Day 1 – Breakfast Day 6)",
+      "Four full days hide access",
+      "All local ground transport during workshop",
+      "Airport transfers",
+      "Photographer-led guidance",
+      "Pre-departure preparation pack",
+    ],
+    notIncluded: [
+      "International flights",
+      "Travel insurance (mandatory)",
+      "Personal equipment",
+      "Alcoholic beverages",
+      "Personal expenses",
+      "Single room supplement",
+    ],
+    equipment: [
+      "300–600mm telephoto lens",
+      "Fast autofocus camera body",
+      "Tripod or gimbal head",
+      "Proper winter clothing and footwear",
+    ],
+    image: "https://picsum.photos/id/1036/1200/800",
+  },
+  {
+    id: "autumn-raptors-norway-2026",
+    title: "Autumn Raptors of Norway",
+    slug: "autumn-raptors-norway",
+    date: "14th – 18th October 2026",
+    location: "Norway",
+    maxPhotographers: 5,
+    price: "£1,500 per person",
+    duration: "5 Days | 4 Nights",
+    overview:
+      "Join ShutterWild Expedition Ltd for an immersive autumn wildlife photography expedition in the forests of southern Norway. This small-group experience is designed for photographers who want dramatic raptor action, rich seasonal colour, and meaningful time in the field. October transforms southern Norway into a stunning tapestry of gold, amber, and crimson.",
+    focusSpecies: [
+      "Woodland raptors",
+      "Jays and other passerines",
+      "Ravens",
+      "Woodpeckers",
+      "Tits and finches",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "14th October | Arrival",
+        description:
+          "Evening arrival at Kristiansand Airport. Transfer to accommodation, welcome dinner, and gear preparation.",
+      },
+      {
+        day: "Day 2",
+        title: "15th October | Full Hide Day",
+        description:
+          "Early morning transfer to woodland hide. Full-day wildlife photography session. Packed lunch provided.",
+      },
+      {
+        day: "Day 3",
+        title: "16th October | Full Hide Day",
+        description:
+          "Early start to maximise activity. Focus on flight technique and behavioural anticipation.",
+      },
+      {
+        day: "Day 4",
+        title: "17th October | Full Hide Day",
+        description:
+          "Third complete day in the hide. Continued action opportunities and final group dinner.",
+      },
+      {
+        day: "Day 5",
+        title: "18th October | Departure",
+        description:
+          "Morning hide session. Transfer to airport for afternoon flights.",
+      },
+    ],
+    included: [
+      "4 nights accommodation",
+      "All meals",
+      "Daily hide access (3 full days + 1 morning)",
+      "Airport transfers",
+      "Field-based photographic guidance",
+    ],
+    notIncluded: [
+      "International flights",
+      "Travel insurance",
+      "Alcoholic beverages",
+      "Personal expenses",
+    ],
+    equipment: [
+      "300–600mm telephoto lens",
+      "Fast autofocus camera body",
+      "Tripod or gimbal head",
+      "Spare batteries and memory cards",
+      "Warm, waterproof autumn clothing",
+    ],
+    image: "https://picsum.photos/id/1025/1200/800",
+  },
+  {
+    id: "sri-lanka-leopard-2027",
+    title: "Sri Lanka Leopard Intensive",
+    slug: "sri-lanka-leopard",
+    date: "8–17 March 2027",
+    location: "Sri Lanka",
+    maxPhotographers: 4,
+    price: "£3,200 per person",
+    duration: "10 Days | 9 Nights",
+    overview:
+      "This immersive 9-night wildlife photography expedition has been carefully designed to maximise time in the field across Sri Lanka’s most productive leopard habitats. With only four guests and one private safari vehicle, this expedition offers flexibility, space, and strategic positioning across Wilpattu, Udawalawe, and Yala National Parks.",
+    focusSpecies: [
+      "Leopards",
+      "Sloth Bears",
+      "Elephants",
+      "Jungle Cats",
+      "Diverse birdlife",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Arrival & Transfer",
+        description: "Arrival and transfer to Wilpattu National Park.",
+      },
+      {
+        day: "Days 2-4",
+        title: "Wilpattu National Park",
+        description:
+          "Three full days of morning and afternoon safaris focused on Leopards, Sloth Bears, and Jungle Cats.",
+      },
+      {
+        day: "Day 5",
+        title: "Transfer South",
+        description:
+          "Morning safari in Wilpattu. Scenic transfer to Udawalawe region.",
+      },
+      {
+        day: "Day 6",
+        title: "Udawalawe National Park",
+        description:
+          "Morning safari focused on elephants and open-country species.",
+      },
+      {
+        day: "Day 7",
+        title: "Transfer to Yala",
+        description: "Transfer to Yala National Park for an afternoon safari.",
+      },
+      {
+        day: "Days 8-9",
+        title: "Yala National Park",
+        description: "Three full safari days dedicated to leopard photography.",
+      },
+      {
+        day: "Days 10-11",
+        title: "Return & Departure",
+        description:
+          "Transfer to Negombo for farewell evening. Departure on Day 11.",
+      },
+    ],
+    included: [
+      "9 nights boutique accommodation",
+      "Full board in safari locations",
+      "Private ground transport",
+      "One private safari jeep for entire group",
+      "All national park entrance fees",
+      "Professional wildlife photography guidance",
+    ],
+    notIncluded: [
+      "International flights",
+      "Travel insurance",
+      "Alcoholic beverages",
+      "Personal expenses",
+      "Single supplement (£600)",
+    ],
+    equipment: [
+      "300–600mm telephoto lens",
+      "Fast autofocus camera body",
+      "Bean bag or monopod for vehicle",
+      "Tropical weather clothing",
+    ],
+    image: "https://picsum.photos/id/1074/1200/800",
+  },
+  {
+    id: "warmia-elite-poland",
+    title: "Warmia Elite Wildlife Photography",
+    slug: "warmia-elite",
+    date: "To Be Announced",
+    location: "Lidzbark Warmiński, Poland",
+    maxPhotographers: 3,
+    price: "£1,800 per person",
+    duration: "5 Days | 4 Full Photo Days",
+    overview:
+      "Join ShutterWild Expedition Ltd for an exclusive wildlife photography expedition in the untouched landscapes of Warmia, Eastern Poland. This is a highly personalised, small-group experience focused on ethical encounters with raptors and woodland mammals in pristine forests and wetlands.",
+    focusSpecies: [
+      "Lesser Spotted Eagle",
+      "Red/Black Kite",
+      "Marsh Harrier",
+      "Red Fox",
+      "Badger",
+      "Roe/Red Deer",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Arrival",
+        description:
+          "Airport pickup, check-in, welcome briefing, and evening sunset photography session.",
+      },
+      {
+        day: "Days 2-5",
+        title: "4 Full Photography Days",
+        description:
+          "Sunrise hide session, midday rest and mentoring, evening golden light session. Optional night photography.",
+      },
+      {
+        day: "Day 6",
+        title: "Departure",
+        description: "Breakfast and transfer to airport.",
+      },
+    ],
+    included: [
+      "4 full days of guided wildlife photography",
+      "Professional photography tuition",
+      "Accommodation and daily breakfast/dinner",
+      "Ground transportation",
+      "Airport transfers",
+      "Hide access",
+    ],
+    notIncluded: [
+      "International flights",
+      "Travel insurance",
+      "Lunches and personal snacks",
+      "Alcoholic beverages",
+    ],
+    equipment: [
+      "DSLR or mirrorless camera",
+      "300–600mm telephoto lens",
+      "Teleconverters",
+      "Tripod or monopod",
+      "Waterproof clothing and boots",
+    ],
+    image: "https://picsum.photos/id/1012/1200/800",
+  },
+  {
+    id: "india-tiger-2027",
+    title: "Panna & Bandhavgarh Tiger Expedition",
+    slug: "india-tiger",
+    date: "20 – 26 April 2027",
+    location: "India",
+    maxPhotographers: 7,
+    price: "£2,900 per person",
+    duration: "7 Days | 6 Nights",
+    overview:
+      "Experience the raw intensity of India’s tiger heartland. This carefully designed expedition combines two of India’s most productive tiger reserves — Panna and Bandhavgarh. With 11 safari drives and 2 exclusive jeeps per session, this expedition prioritises opportunity, positioning and consistency.",
+    focusSpecies: [
+      "Bengal Tiger",
+      "Leopard",
+      "Sloth Bear",
+      "Dhole (Indian Wild Dog)",
+      "Jungle Cat",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "20 April | Arrival",
+        description:
+          "Arrival at Jabalpur. Transfer to Panna for check-in and briefing.",
+      },
+      {
+        day: "Days 2-3",
+        title: "Panna National Park",
+        description:
+          "5 Jeep Safaris with 2 exclusive jeeps. Transfer to Bandhavgarh on Day 3.",
+      },
+      {
+        day: "Days 4-6",
+        title: "Bandhavgarh National Park",
+        description:
+          "6 Jeep Safaris focused on dedicated photographic positioning for tigers.",
+      },
+      {
+        day: "Day 7",
+        title: "26 April | Departure",
+        description: "Breakfast and transfer to airport for departure.",
+      },
+    ],
+    included: [
+      "6 Nights accommodation",
+      "All meals (Breakfast, Lunch, Dinner)",
+      "11 Jeep safaris (2 exclusive jeeps)",
+      "Chosen driver and vehicle consistency",
+      "Professional local guides and park permits",
+      "All local transportation and transfers",
+    ],
+    notIncluded: [
+      "International flights",
+      "Indian visa fees",
+      "Travel insurance",
+      "Gratuities and tips",
+      "Camera charges (subject to park policy)",
+    ],
+    equipment: [
+      "DSLR or mirrorless camera with fast autofocus",
+      "400–600mm telephoto lens",
+      "Secondary camera body",
+      "Bean bag for vehicle support",
+      "Dust protection for equipment",
+    ],
+    image: "https://picsum.photos/id/1083/1200/800",
+  },
+  {
+    id: "poland-eagle",
+    title: "White-tailed Eagle Expedition",
+    slug: "poland-eagle",
+    date: "To Be Announced",
+    location: "Poland",
+    maxPhotographers: 3,
+    price: "£1,600 per person",
+    duration: "4 Days | 3 Full Photo Days",
+    overview:
+      "Join ShutterWild Expedition Ltd for an intensive White-tailed Eagle photography expedition in Poland — one of Europe’s strongest populations of this magnificent raptor. Each day is spent inside professional wildlife hides from sunrise to sunset.",
+    focusSpecies: [
+      "White-tailed Eagle",
+      "Common Buzzard",
+      "Rough-legged Buzzard",
+      "Red Kite",
+      "Raven",
+      "Red Fox",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Arrival",
+        description: "Airport pickup, check-in, and welcome briefing.",
+      },
+      {
+        day: "Days 2-4",
+        title: "Hide Photography",
+        description:
+          "3 full days of sunrise-to-sunset hide photography with packed lunches provided.",
+      },
+      {
+        day: "Day 5",
+        title: "Departure",
+        description: "Breakfast and transfer to airport.",
+      },
+    ],
+    included: [
+      "3 full days of guided wildlife photography",
+      "Professional photography tuition",
+      "Accommodation and daily breakfast/dinner",
+      "Daily packed lunch",
+      "Ground transportation and airport transfers",
+      "Hide access with mounted plate system",
+    ],
+    notIncluded: [
+      "International flights",
+      "Travel insurance",
+      "Alcoholic beverages",
+      "Personal expenses",
+    ],
+    equipment: [
+      "Camera with fast burst rate",
+      "400–600mm telephoto lens",
+      "Tripod head or gimbal head (hide plate provided)",
+      "Warm clothing",
+    ],
+    image: "https://picsum.photos/id/1024/1200/800",
+  },
+  {
+    id: "pantanal-jaguar-2027",
+    title: "Pantanal Jaguar Expedition",
+    slug: "pantanal-jaguar",
+    date: "23 August 2027",
+    location: "Porto Jofre, Brazil",
+    maxPhotographers: 5,
+    price: "£4,800 per person",
+    duration: "7 Days | 6 Nights",
+    overview:
+      "This is a focused, high-intensity wildlife expedition designed for photographers who want real time in the field. Operating during the prime dry season, this trip focuses on the Cuiabá River for exceptional jaguar visibility, hunting sequences, and swimming jaguars.",
+    focusSpecies: [
+      "Jaguar",
+      "Hyacinth Macaw",
+      "Jabiru Stork",
+      "Caiman",
+      "Capybara",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Arrival & Transfer",
+        description:
+          "Arrival into Cuiabá (CGB). Private transfer to Porto Jofre via the Transpantaneira with wildlife stops.",
+      },
+      {
+        day: "Days 2-6",
+        title: "Full Jaguar Focus",
+        description:
+          "Dedicated river safaris from sunrise to sunset prioritising prime river territories and clean background compositions.",
+      },
+      {
+        day: "Day 7",
+        title: "Departure",
+        description: "Breakfast and transfer back to Cuiabá Airport.",
+      },
+    ],
+    included: [
+      "6 nights lodge accommodation",
+      "All meals",
+      "Daily sunrise–sunset river safaris",
+      "Professional bilingual wildlife guide",
+      "Experienced boat pilot",
+      "Cuiabá airport transfers",
+    ],
+    notIncluded: [
+      "International/Domestic flights",
+      "Travel insurance (mandatory)",
+      "Alcoholic drinks",
+      "Gratuities",
+    ],
+    equipment: [
+      "Fast autofocus camera",
+      "300-600mm telephoto lens",
+      "Sun protection and tropical clothing",
+      "Waterproof bags for boat",
+    ],
+    image: "https://picsum.photos/id/1043/1200/800",
+  },
+];

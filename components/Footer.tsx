@@ -1,35 +1,50 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import { Facebook, Instagram, Twitter, Youtube, Linkedin, Mail, Phone } from 'lucide-react';
-import Image from 'next/image';
+import { motion } from "motion/react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Youtube,
+  Linkedin,
+  Mail,
+  Phone,
+} from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="relative bg-[#1A1A1A] text-white pt-24 pb-12 px-6 md:px-12 lg:px-24 overflow-hidden">
       {/* Background Image Overlay */}
       <div className="absolute inset-0 z-0 opacity-20">
-         <Image
-            src="https://picsum.photos/id/1069/1920/1080" // Jellyfish/Dark nature
-            alt="Footer Background"
-            fill
-            className="object-cover"
-            unoptimized
-         />
-         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent" />
+        <Image
+          src="https://picsum.photos/id/1069/1920/1080" // Jellyfish/Dark nature
+          alt="Footer Background"
+          fill
+          className="object-cover"
+          unoptimized
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent" />
       </div>
 
       <div className="relative z-10 text-center mb-24">
-        <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4 block">[ Start Capturing ]</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4 block">
+          [ Start Capturing ]
+        </span>
         <h2 className="font-serif text-4xl md:text-5xl lg:text-7xl mb-6">
           Start Your Wildlife Photo Journey <br />
-          Today <span className="font-bold">WITH WILDSNAP.</span>
+          Today{" "}
+          <span className="font-bold border-b border-white pb-2">
+            WITH SHUTTER WILD.
+          </span>
         </h2>
         <p className="text-white/60 max-w-xl mx-auto mb-10 text-sm md:text-base">
-          From deep jungles to desert dunes, Wildsnap offers more than photos—we capture wild emotion, texture, and truth. Join us in telling nature&apos;s tale.
+          From deep jungles to desert dunes, Shutter Wild offers more than
+          photos—we capture wild emotion, texture, and truth. Join us in telling
+          nature&apos;s tale.
         </p>
-        <button className="bg-white text-black px-8 py-3 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-gray-200 transition-colors">
-          Schedule Today
+        <button className="bg-white text-black px-8 py-3 text-xs font-bold uppercase tracking-wider hover:bg-gray-200 transition-colors">
+          View Expeditions
         </button>
       </div>
 
@@ -37,59 +52,84 @@ export default function Footer() {
         <div>
           <h4 className="font-serif text-xl mb-6">Find And Follow Us</h4>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-gray-300 transition-colors"><Facebook size={20} /></a>
-            <a href="#" className="hover:text-gray-300 transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="hover:text-gray-300 transition-colors"><Twitter size={20} /></a>
-            <a href="#" className="hover:text-gray-300 transition-colors"><Youtube size={20} /></a>
-            <a href="#" className="hover:text-gray-300 transition-colors"><Linkedin size={20} /></a>
+            <a href="#" className="hover:text-gray-300 transition-colors">
+              <Facebook size={20} />
+            </a>
+            <a href="#" className="hover:text-gray-300 transition-colors">
+              <Instagram size={20} />
+            </a>
+            <a href="#" className="hover:text-gray-300 transition-colors">
+              <Twitter size={20} />
+            </a>
+            <a href="#" className="hover:text-gray-300 transition-colors">
+              <Youtube size={20} />
+            </a>
+            <a href="#" className="hover:text-gray-300 transition-colors">
+              <Linkedin size={20} />
+            </a>
           </div>
         </div>
 
-        <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm text-white/70">
+        <div className="lg:col-span-2 grid grid-cols-2 gap-8 text-sm text-white/70">
           <div className="space-y-3">
-            <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">Company</h5>
-            <a href="#" className="block hover:text-white transition-colors">About</a>
-            <a href="#" className="block hover:text-white transition-colors">Career <span className="bg-green-600 text-white text-[10px] px-1 rounded ml-1">Hiring!</span></a>
-            <a href="#" className="block hover:text-white transition-colors">Reviews</a>
-            <a href="#" className="block hover:text-white transition-colors">Gallery</a>
+            <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">
+              Explore
+            </h5>
+            <a
+              href="/tours"
+              className="block hover:text-white transition-colors"
+            >
+              Expeditions
+            </a>
+            <a
+              href="/#approach"
+              className="block hover:text-white transition-colors"
+            >
+              Our Approach
+            </a>
+            <a
+              href="/#gallery"
+              className="block hover:text-white transition-colors"
+            >
+              Gallery
+            </a>
           </div>
           <div className="space-y-3">
-            <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">Destinations</h5>
-            <a href="#" className="block hover:text-white transition-colors">Asia</a>
-            <a href="#" className="block hover:text-white transition-colors">Europe</a>
-            <a href="#" className="block hover:text-white transition-colors">America</a>
-            <a href="#" className="block hover:text-white transition-colors">Africa</a>
-          </div>
-          <div className="space-y-3">
-            <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">Quick Access</h5>
-            <a href="#" className="block hover:text-white transition-colors">Services</a>
-            <a href="#" className="block hover:text-white transition-colors">Projects</a>
-            <a href="#" className="block hover:text-white transition-colors">Our Team</a>
-            <a href="#" className="block hover:text-white transition-colors">Training</a>
-          </div>
-          <div className="space-y-3">
-            <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">Support</h5>
-            <a href="#" className="block hover:text-white transition-colors">FAQs</a>
-            <a href="#" className="block hover:text-white transition-colors">Contact Us</a>
-            <a href="#" className="block hover:text-white transition-colors">Help Center</a>
-            <a href="#" className="block hover:text-white transition-colors">Blog & News</a>
+            <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">
+              Connect
+            </h5>
+            <a
+              href="/#contact"
+              className="block hover:text-white transition-colors"
+            >
+              Contact Us
+            </a>
+            <a href="#" className="block hover:text-white transition-colors">
+              Instagram
+            </a>
+            <a href="#" className="block hover:text-white transition-colors">
+              FAQs
+            </a>
           </div>
         </div>
 
         <div>
-          <h4 className="font-serif text-xl mb-6">Subscribe To Our Newsletter</h4>
+          <h4 className="font-serif text-xl mb-6">
+            Subscribe To Our Newsletter
+          </h4>
           <form className="flex flex-col gap-4">
-            <input 
-              type="email" 
-              placeholder="e.g. hello@email.com" 
-              className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors"
+            <input
+              type="email"
+              placeholder="e.g. hello@email.com"
+              className="bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors"
             />
-            <button className="bg-[#2C3E2E] text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-[#1A261C] transition-colors">
+            <button className="bg-[#2C3E2E] text-white px-6 py-3 text-xs font-bold uppercase tracking-wider hover:bg-[#1A261C] transition-colors">
               Subscribe
             </button>
           </form>
           <p className="text-[10px] text-white/40 mt-4 leading-tight">
-            Join our newsletter and receive stunning wildlife imagery, field notes, and seasonal booking updates.
+            Join our newsletter and receive stunning wildlife imagery, field
+            notes, and seasonal booking updates.
           </p>
         </div>
       </div>
@@ -106,8 +146,12 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" className="hover:text-white transition-colors">
+            Privacy Policy
+          </a>
+          <a href="#" className="hover:text-white transition-colors">
+            Terms of Service
+          </a>
         </div>
       </div>
     </footer>

@@ -1,90 +1,68 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import Image from 'next/image';
+import { motion } from "motion/react";
+import { Leaf, Eye, Users } from "lucide-react";
 
-const galleryImages = [
+const principles = [
   {
-    id: 1,
-    title: "Tropical Birds",
-    tags: ["Toucan-Bird", "Perch", "Vibrant", "Macro"],
-    image: "https://picsum.photos/id/1024/800/600" // Toucan
+    icon: <Leaf className="w-8 h-8 md:w-12 md:h-12 mb-6 text-gray-400" />,
+    title: "Ethical Encounters",
+    description:
+      "We operate without baiting or disturbance. Nature is unpredictable, and we document it authentically, maintaining safe distances and respecting habitats.",
   },
   {
-    id: 2,
-    title: "Predators In Action",
-    tags: ["Lions", "Motion-Blur", "Gold", "Dusk"],
-    image: "https://picsum.photos/id/1074/800/600" // Lion
+    icon: <Eye className="w-8 h-8 md:w-12 md:h-12 mb-6 text-gray-400" />,
+    title: "Fieldcraft & Instinct",
+    description:
+      "Every tour is built around interpreting light and predicting behaviour. We prioritise strategic positioning to ensure powerful, portfolio-worthy framing.",
   },
   {
-    id: 3,
-    title: "Savanna Moments",
-    tags: ["Hartebeest", "Sunset", "Fight", "Herd"],
-    image: "https://picsum.photos/id/1083/800/600" // Savanna
+    icon: <Users className="w-8 h-8 md:w-12 md:h-12 mb-6 text-gray-400" />,
+    title: "Small-Group Intensity",
+    description:
+      "By strictly limiting numbers, we guarantee freedom of movement, cleaner shooting angles, and personal guidance in both hides and vehicles.",
   },
-  {
-    id: 4,
-    title: "Mountain Dwellers",
-    tags: ["Ibex", "Panorama", "Cliff", "Distance"],
-    image: "https://picsum.photos/id/1036/800/600" // Mountain
-  },
-  {
-    id: 5,
-    title: "Primates In Motion",
-    tags: ["Chimpanzee", "Grooming", "Forest-Light", "Candid"],
-    image: "https://picsum.photos/id/1012/800/600" // Primate
-  },
-  {
-    id: 6,
-    title: "Reptile Realm",
-    tags: ["Chameleon", "Textures", "Focus", "Camouflaged"],
-    image: "https://picsum.photos/id/1043/800/600" // Reptile
-  }
 ];
 
 export default function Gallery() {
   return (
     <section className="py-24 px-6 md:px-12 lg:px-24 bg-[#2C3E2E] text-white">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-        <div>
-          <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-2 block">[ Through Our Lens ]</span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium">
-            Stories From <span className="font-bold">THE WILDERNESS.</span>
-          </h2>
-        </div>
-        <button className="mt-8 md:mt-0 border border-white/30 backdrop-blur-sm text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-white/10 transition-colors">
-          View All Photos
-        </button>
+      <div className="text-center mb-20 max-w-3xl mx-auto">
+        <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4 block">
+          [ Our Philosophy ]
+        </span>
+        <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
+          The Photographic{" "}
+          <span className="font-bold border-b border-white/30 pb-2">
+            APPROACH.
+          </span>
+        </h2>
+        <p className="text-white/80 text-lg leading-relaxed">
+          We don't just organise trips — we create opportunities to capture the
+          extraordinary. This means stripping back the tourist noise and
+          focusing on what actually matters to serious photographers.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {galleryImages.map((item, index) => (
-          <motion.div 
-            key={item.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 max-w-7xl mx-auto">
+        {principles.map((principle, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: index * 0.15, duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center text-center p-8 border border-white/10 bg-white/5 hover:bg-white/10 transition-colors duration-500 rounded-sm group cursor-default"
           >
-            <Image
-              src={item.image}
-              alt={item.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-              unoptimized
-            />
-            
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-              <h3 className="font-serif text-2xl mb-2">{item.title}</h3>
-              <div className="flex flex-wrap gap-2">
-                {item.tags.map((tag, i) => (
-                  <span key={i} className="text-[10px] uppercase tracking-wider bg-white/20 px-2 py-1 rounded-sm backdrop-blur-sm">
-                    {tag}
-                  </span>
-                ))}
-              </div>
+            <div className="transform group-hover:scale-110 transition-transform duration-500">
+              {principle.icon}
             </div>
+            <h3 className="font-serif text-2xl mb-4 leading-tight">
+              {principle.title}
+            </h3>
+            <p className="text-white/70 text-sm leading-relaxed">
+              {principle.description}
+            </p>
           </motion.div>
         ))}
       </div>
