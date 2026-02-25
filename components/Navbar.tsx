@@ -41,24 +41,23 @@ export default function Navbar() {
 
   // Determine navbar aesthetics based on route and scroll state
   const isHomePage = pathname === "/";
-  // If we are on the tours list page, the background is light, so we want black text initially.
-  // If we are on a tour detail page, the hero is dark, so we want white text initially.
-  // If we have scrolled past hero, we might want to invert. For simplicity, we'll assign a base color:
   const isTourDetailPage = pathname.startsWith("/tours/");
-  const isToursListPage = pathname === "/tours";
+  const hasDarkHero = isHomePage || isTourDetailPage;
 
-  let navClasses = "bg-transparent text-white";
+  let navClasses = "";
 
   if (isOpen) {
     navClasses = "bg-transparent text-white";
   } else if (scrolled) {
-    navClasses = "bg-white/90 backdrop-blur-md text-[#1A1A1A] shadow-sm";
-  } else if (isToursListPage) {
-    navClasses = "bg-transparent text-[#1A1A1A]";
-  } else {
+    navClasses = "bg-[#F4F4F0]/90 backdrop-blur-md text-[#1A1A1A]";
+  } else if (hasDarkHero) {
     // Default for top of Home and Tour Detail pages (dark hero)
     navClasses = "bg-transparent text-white";
+  } else {
+    // Any other page without a hero image has a light background
+    navClasses = "bg-transparent text-[#1A1A1A]";
   }
+  ``;
 
   const closeMenu = () => setIsOpen(false);
 
