@@ -6,14 +6,14 @@ import { Instagram } from "lucide-react";
 
 // Mocking the feed with visually stunning placeholders
 const instaPosts = [
-  "https://picsum.photos/id/1024/600/600",
-  "https://picsum.photos/id/1074/600/600",
-  "https://picsum.photos/id/1083/600/600",
-  "https://picsum.photos/id/1036/600/600",
-  "https://picsum.photos/id/1012/600/600",
-  "https://picsum.photos/id/1043/600/600",
-  "https://picsum.photos/id/1003/600/600",
-  "https://picsum.photos/id/1025/600/600",
+  "/captures/Autumn Raptors of Norway/wildlife photography norway – sparrowhawk action in autumn-12.webp",
+  "/captures/India Tiger/bengal-tiger-india-safari.webp",
+  "/captures/Norway winter/goshawk-in-snow-norway-2.webp",
+  "/captures/PANTANAL JAGUAR/jaguar-pantanal-brazil-riverbank.webp",
+  "/captures/Poland Autumn/white-tailed-eagle-flight-poland-autumn-1.webp",
+  "/captures/Poland winter Eagle/raven-in-flight-winter-poland.webp",
+  "/captures/Srilanka/sloth-bear-yala-national-park.webp",
+  "/captures/India Tiger/bengal-tiger-close-portrait-india.webp",
 ];
 
 export default function InstagramGrid() {

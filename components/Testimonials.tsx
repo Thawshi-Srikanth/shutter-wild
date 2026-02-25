@@ -42,7 +42,7 @@ export default function Testimonials() {
 
         <div className="relative aspect-[4/3] overflow-hidden shadow-2xl">
           <Image
-            src="https://picsum.photos/id/1027/800/600" // Placeholder for Sophia
+            src="/captures/Poland Autumn/grey-wolf-poland-autumn-1.webp" // Wolf
             alt="Sophia Martinez"
             fill
             className="object-cover"

@@ -42,8 +42,7 @@ export default function Navbar() {
 
   // Determine navbar aesthetics based on route and scroll state
   const isHomePage = pathname === "/";
-  const isTourDetailPage = pathname.startsWith("/tours/");
-  const hasDarkHero = isHomePage || isTourDetailPage;
+  const hasDarkHero = isHomePage;
 
   let navClasses = "";
 

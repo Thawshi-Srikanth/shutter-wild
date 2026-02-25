@@ -78,7 +78,7 @@ export const tours: Tour[] = [
       "Tripod or gimbal head",
       "Proper winter clothing and footwear",
     ],
-    image: "https://picsum.photos/id/1036/1200/800",
+    image: "/captures/Norway winter/golden-eagle-hunting-winter-norway.webp",
   },
   {
     id: "autumn-raptors-norway-2026",
@@ -150,7 +150,8 @@ export const tours: Tour[] = [
       "Spare batteries and memory cards",
       "Warm, waterproof autumn clothing",
     ],
-    image: "https://picsum.photos/id/1025/1200/800",
+    image:
+      "/captures/Autumn Raptors of Norway/wildlife photography norway – sparrowhawk action in autumn-4.webp",
   },
   {
     id: "sri-lanka-leopard-2027",
@@ -232,7 +233,7 @@ export const tours: Tour[] = [
       "Bean bag or monopod for vehicle",
       "Tropical weather clothing",
     ],
-    image: "https://picsum.photos/id/1074/1200/800",
+    image: "/captures/Srilanka/sri-lanka-leopard-yala.webp",
   },
   {
     id: "warmia-elite-poland",
@@ -293,7 +294,8 @@ export const tours: Tour[] = [
       "Tripod or monopod",
       "Waterproof clothing and boots",
     ],
-    image: "https://picsum.photos/id/1012/1200/800",
+    image:
+      "/captures/Poland Autumn/white-tailed-eagle-hide-photography-poland.webp",
   },
   {
     id: "india-tiger-2027",
@@ -360,7 +362,7 @@ export const tours: Tour[] = [
       "Bean bag for vehicle support",
       "Dust protection for equipment",
     ],
-    image: "https://picsum.photos/id/1083/1200/800",
+    image: "/captures/India Tiger/bengal-tiger-walking-in-jungle-india.webp",
   },
   {
     id: "poland-eagle",
@@ -419,7 +421,8 @@ export const tours: Tour[] = [
       "Tripod head or gimbal head (hide plate provided)",
       "Warm clothing",
     ],
-    image: "https://picsum.photos/id/1024/1200/800",
+    image:
+      "/captures/Poland Autumn/white-tailed-eagle-golden-light-poland.webp",
   },
   {
     id: "pantanal-jaguar-2027",
@@ -478,6 +481,6 @@ export const tours: Tour[] = [
       "Sun protection and tropical clothing",
       "Waterproof bags for boat",
     ],
-    image: "https://picsum.photos/id/1043/1200/800",
+    image: "/captures/PANTANAL JAGUAR/jaguar-in-golden-light-pantanal.webp",
   },
 ];

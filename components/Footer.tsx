@@ -18,7 +18,7 @@ export default function Footer() {
       {/* Background Image Overlay */}
       <div className="absolute inset-0 z-0 opacity-20">
         <Image
-          src="https://picsum.photos/id/1069/1920/1080" // Jellyfish/Dark nature
+          src="/captures/Norway winter/goshawk-forest-winter-norway.webp" // Goshawk
           alt="Footer Background"
           fill
           className="object-cover"

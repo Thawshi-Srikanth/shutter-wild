@@ -16,7 +16,7 @@ export default function Hero() {
       {/* Background Image Parallax */}
       <motion.div style={{ y }} className="absolute inset-[-10%] z-0">
         <Image
-          src="/images/background-lepeord.png"
+          src="/captures/Srilanka/sri-lanka-leopard-yala.webp"
           alt="Wildlife Background"
           fill
           className="object-cover opacity-60"

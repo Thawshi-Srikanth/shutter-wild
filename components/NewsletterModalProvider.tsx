@@ -95,7 +95,7 @@ export function NewsletterModalProvider({ children }: { children: ReactNode }) {
               {/* Image Section */}
               <div className="relative w-full md:w-1/2 h-56 md:h-auto">
                 <Image
-                  src="https://picsum.photos/id/1024/800/1000" // Example wildlife/nature image (eagle)
+                  src="/captures/Autumn Raptors of Norway/wildlife photography norway – sparrowhawk action in autumn-11.webp" // Sparrowhawk image
                   alt="Wildlife Newsletter"
                   fill
                   className="object-cover"

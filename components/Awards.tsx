@@ -66,7 +66,7 @@ export default function Awards() {
 
         <div className="relative aspect-[4/3] overflow-hidden shadow-2xl">
           <Image
-            src="https://picsum.photos/id/1062/800/600" // Placeholder for Award Image (Dog/Wolf)
+            src="/captures/Poland Autumn/grey-wolf-poland-autumn-2.webp" // Wolf
             alt="Award Winning Shot"
             fill
             className="object-cover"

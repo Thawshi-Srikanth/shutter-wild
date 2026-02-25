@@ -86,7 +86,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
               {/* Image Section (Visible on large screens) */}
               <div className="hidden lg:block lg:w-2/5 relative">
                 <Image
-                  src="https://picsum.photos/id/1018/800/1000" // Example wildlife/nature image
+                  src="/captures/India Tiger/bengal-tiger-eye-contact-india.webp" // Tiger image
                   alt="Booking nature background"
                   fill
                   className="object-cover"
