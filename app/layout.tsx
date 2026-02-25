@@ -3,8 +3,8 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CookieBanner from "@/components/CookieBanner";
-import NewsletterBanner from "@/components/NewsletterBanner";
 import { BookingModalProvider } from "@/components/BookingModalProvider";
+import { NewsletterModalProvider } from "@/components/NewsletterModalProvider";
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
@@ -35,11 +35,12 @@ export default function RootLayout({
         className="font-sans antialiased bg-[#F4F4F0] text-[#1A1A1A]"
         suppressHydrationWarning
       >
-        <BookingModalProvider>
-          <SmoothScroll>{children}</SmoothScroll>
-          <CookieBanner />
-          <NewsletterBanner />
-        </BookingModalProvider>
+        <NewsletterModalProvider>
+          <BookingModalProvider>
+            <SmoothScroll>{children}</SmoothScroll>
+            <CookieBanner />
+          </BookingModalProvider>
+        </NewsletterModalProvider>
       </body>
     </html>
   );
