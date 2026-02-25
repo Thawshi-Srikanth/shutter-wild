@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
+  { name: "Home", href: "/" },
   { name: "Expeditions", href: "/tours" },
   { name: "Our Approach", href: "/#approach" },
   { name: "Gallery", href: "/#gallery" },
@@ -57,7 +58,6 @@ export default function Navbar() {
     // Any other page without a hero image has a light background
     navClasses = "bg-transparent text-[#1A1A1A]";
   }
-  ``;
 
   const closeMenu = () => setIsOpen(false);
 
@@ -91,11 +91,14 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-50 bg-[#1A1A1A] flex flex-col justify-center px-6 md:px-24"
+            className="fixed inset-0 z-40 bg-[#1A1A1A] flex flex-col justify-center px-6 md:px-24"
           >
-            <div className="flex flex-col gap-6 md:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
               {navLinks.map((link, i) => (
-                <div key={link.name} className="overflow-hidden">
+                <div
+                  key={link.name}
+                  className="overflow-hidden flex items-center"
+                >
                   <motion.div
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
@@ -109,7 +112,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className="font-serif text-5xl md:text-7xl lg:text-8xl text-white hover:text-gray-400 transition-colors inline-block"
+                      className="font-serif text-5xl md:text-6xl lg:text-7xl text-white hover:text-gray-400 transition-colors inline-block"
                     >
                       {link.name}
                     </Link>
