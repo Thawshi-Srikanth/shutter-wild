@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BookingActions from "@/components/BookingActions";
 import { tours } from "@/data/tours";
 import {
   ArrowLeft,
@@ -147,9 +148,7 @@ export default async function TourPage({
                 {tour.price.split(" ").slice(1).join(" ")}
               </div>
 
-              <button className="w-full bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors mb-8">
-                Enquire Now
-              </button>
+              <BookingActions tourName={tour.title} />
 
               <div className="mb-8">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4 border-b pb-2">
