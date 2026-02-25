@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CookieBanner from "@/components/CookieBanner";
+import NewsletterBanner from "@/components/NewsletterBanner";
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         <SmoothScroll>{children}</SmoothScroll>
         <CookieBanner />
+        <NewsletterBanner />
       </body>
     </html>
   );
