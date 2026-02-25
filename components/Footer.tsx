@@ -135,21 +135,42 @@ export default function Footer() {
       </div>
 
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-center mt-16 pt-8 border-t border-white/10 text-xs text-white/40">
-        <div className="flex gap-8 mb-4 md:mb-0">
-          <div className="flex items-center gap-2">
-            <Phone size={14} />
-            <span>474 - 937 - 8270</span>
+        <div className="flex flex-col mb-4 md:mb-0">
+          <div className="flex gap-8 mb-2">
+            <div className="flex items-center gap-2">
+              <Phone size={14} />
+              <span>474 - 937 - 8270</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail size={14} />
+              <span>mail@yoursite.com</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Mail size={14} />
-            <span>mail@yoursite.com</span>
+          <div className="text-[10px] text-white/30 flex flex-col gap-0.5 mt-2">
+            <p className="font-semibold text-white/40">
+              SHUTTERWILD EXPEDITIONS LTD
+            </p>
+            <p>Company Number: 17011318</p>
+            <p>Registered in England and Wales</p>
           </div>
         </div>
-        <div className="flex gap-6">
-          <a href="#" className="hover:text-white transition-colors">
+        <div className="flex flex-wrap items-center justify-center gap-6">
+          <a
+            href="/privacy-policy"
+            className="hover:text-white transition-colors"
+          >
             Privacy Policy
           </a>
-          <a href="#" className="hover:text-white transition-colors">
+          <a
+            href="/cookie-policy"
+            className="hover:text-white transition-colors"
+          >
+            Cookie Policy
+          </a>
+          <a
+            href="/terms-of-service"
+            className="hover:text-white transition-colors"
+          >
             Terms of Service
           </a>
         </div>
