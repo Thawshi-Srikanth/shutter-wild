@@ -1,15 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-  Facebook,
-  Instagram,
-  Twitter,
-  Youtube,
-  Linkedin,
-  Mail,
-  Phone,
-} from "lucide-react";
+import { Facebook, Instagram, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 
 export default function Footer() {
@@ -52,20 +44,17 @@ export default function Footer() {
         <div>
           <h4 className="font-serif text-xl mb-6">Find And Follow Us</h4>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-gray-300 transition-colors">
+            <a
+              href="https://www.facebook.com/thinesht"
+              className="hover:text-gray-300 transition-colors"
+            >
               <Facebook size={20} />
             </a>
-            <a href="#" className="hover:text-gray-300 transition-colors">
+            <a
+              href="https://www.instagram.com/thineshtphotography"
+              className="hover:text-gray-300 transition-colors"
+            >
               <Instagram size={20} />
-            </a>
-            <a href="#" className="hover:text-gray-300 transition-colors">
-              <Twitter size={20} />
-            </a>
-            <a href="#" className="hover:text-gray-300 transition-colors">
-              <Youtube size={20} />
-            </a>
-            <a href="#" className="hover:text-gray-300 transition-colors">
-              <Linkedin size={20} />
             </a>
           </div>
         </div>
@@ -82,13 +71,7 @@ export default function Footer() {
               Expeditions
             </a>
             <a
-              href="/#approach"
-              className="block hover:text-white transition-colors"
-            >
-              Our Approach
-            </a>
-            <a
-              href="/#gallery"
+              href="/gallery"
               className="block hover:text-white transition-colors"
             >
               Gallery
@@ -99,16 +82,16 @@ export default function Footer() {
               Connect
             </h5>
             <a
-              href="/#contact"
+              href="/contact"
               className="block hover:text-white transition-colors"
             >
               Contact Us
             </a>
-            <a href="#" className="block hover:text-white transition-colors">
+            <a
+              href="https://www.instagram.com/thineshtphotography"
+              className="block hover:text-white transition-colors"
+            >
               Instagram
-            </a>
-            <a href="#" className="block hover:text-white transition-colors">
-              FAQs
             </a>
           </div>
         </div>

@@ -9,9 +9,8 @@ import { motion, AnimatePresence } from "motion/react";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Expeditions", href: "/tours" },
-  { name: "Our Approach", href: "/#approach" },
-  { name: "Gallery", href: "/#gallery" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
