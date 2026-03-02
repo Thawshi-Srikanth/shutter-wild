@@ -6,13 +6,13 @@ import { Instagram } from "lucide-react";
 
 // Mocking the feed with visually stunning placeholders
 const instaPosts = [
-  "/captures/Autumn Raptors of Norway/wildlife photography norway – sparrowhawk action in autumn-12.webp",
+  "/captures/Autumn Norway/wildlife photography norway – sparrowhawk action in autumn-12.webp",
   "/captures/India Tiger/bengal-tiger-india-safari.webp",
-  "/captures/Norway winter/goshawk-in-snow-norway-2.webp",
-  "/captures/PANTANAL JAGUAR/jaguar-pantanal-brazil-riverbank.webp",
+  "/captures/Norway Winter/goshawk-in-snow-norway-2.webp",
+  "/captures/Pantanal Jaguar/jaguar-pantanal-brazil-riverbank.webp",
   "/captures/Poland Autumn/white-tailed-eagle-flight-poland-autumn-1.webp",
-  "/captures/Poland winter Eagle/raven-in-flight-winter-poland.webp",
-  "/captures/Srilanka/sloth-bear-yala-national-park.webp",
+  "/captures/Poland Winter/raven-in-flight-winter-poland.webp",
+  "/captures/Sri Lanka/sloth-bear-yala-national-park.webp",
   "/captures/India Tiger/bengal-tiger-close-portrait-india.webp",
 ];
 

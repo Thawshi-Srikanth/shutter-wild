@@ -9,7 +9,7 @@ export default function About() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div className="relative aspect-[4/3] overflow-hidden shadow-2xl">
           <Image
-            src="/captures/Srilanka/asian-elephant-yala-national-park.webp" // Elephant
+            src="/captures/Sri Lanka/asian-elephant-yala-national-park.webp" // Elephant
             alt="Photographer in the wild"
             fill
             className="object-cover"

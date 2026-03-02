@@ -19,7 +19,7 @@ const services = [
     description:
       "We capture animals in their natural habitat, blending art an adventure to deliver unforgettable wildlife portraits.",
     icon: <Camera size={24} />,
-    image: "/captures/PANTANAL JAGUAR/jaguar-on-tree-pantanal-brazil.webp", // Placeholder for Safari
+    image: "/captures/Pantanal Jaguar/jaguar-on-tree-pantanal-brazil.webp", // Placeholder for Safari
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const services = [
     description:
       "Document life on open plains—from predators stalking prey to herds in motion under golden skies.",
     icon: <Trees size={24} />,
-    image: "/captures/Srilanka/asian-elephant-yala-national-park.webp", // Placeholder for Savanna
+    image: "/captures/Sri Lanka/asian-elephant-yala-national-park.webp", // Placeholder for Savanna
   },
   {
     id: 3,
@@ -35,7 +35,8 @@ const services = [
     description:
       "Our photographers document rare birds with high-speed equipment, perfect for documentaries and research use.",
     icon: <Bird size={24} />,
-    image: "/captures/Srilanka/sri-lanka-bird-photography-green-bee-eater.webp", // Placeholder for Birds
+    image:
+      "/captures/Sri Lanka/sri-lanka-bird-photography-green-bee-eater.webp", // Placeholder for Birds
   },
   {
     id: 4,
@@ -51,7 +52,7 @@ const services = [
     description:
       "Aerial wildlife photography from drones to cover large range and capture herds or flocks in their natural formations.",
     icon: <ScanEye size={24} />,
-    image: "/captures/Norway winter/golden-eagle-flight-over-snow-norway.webp", // Placeholder for Drone
+    image: "/captures/Norway Winter/golden-eagle-flight-over-snow-norway.webp", // Placeholder for Drone
   },
   {
     id: 6,
@@ -60,7 +61,7 @@ const services = [
       "Low-light and infrared photography to reveal wildlife behavior after sunset in remote locations.",
     icon: <Moon size={24} />,
     image:
-      "/captures/Srilanka/leopard-sri-lanka-national-park-2-dark-lighting.webp", // Placeholder for Night
+      "/captures/Sri Lanka/leopard-sri-lanka-national-park-2-dark-lighting.webp", // Placeholder for Night
   },
 ];
 
