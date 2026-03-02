@@ -38,8 +38,8 @@ export default function Gallery() {
           </span>
         </h2>
         <p className="text-white/80 text-lg leading-relaxed">
-          We don't just organise trips — we create opportunities to capture the
-          extraordinary. This means stripping back the tourist noise and
+          We don&apos;t just organise trips — we create opportunities to capture
+          the extraordinary. This means stripping back the tourist noise and
           focusing on what actually matters to serious photographers.
         </p>
       </div>

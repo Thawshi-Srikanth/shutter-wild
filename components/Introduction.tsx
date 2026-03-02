@@ -37,8 +37,8 @@ export default function Introduction() {
               return home with powerful, portfolio-worthy images.
             </p>
             <p className="font-serif text-xl md:text-2xl font-medium italic text-gray-800 border-l-4 border-black pl-6 my-8">
-              "We don’t just organise trips — we create opportunities to capture
-              the extraordinary."
+              &quot;We don&apos;t just organise trips — we create opportunities
+              to capture the extraordinary.&quot;
             </p>
             <p className="text-gray-600 mb-8 leading-relaxed">
               Led by an award-winning and internationally published wildlife

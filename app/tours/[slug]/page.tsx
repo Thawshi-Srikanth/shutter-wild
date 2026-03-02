@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingActions from "@/components/BookingActions";
+import MobileStickyBooking from "@/components/MobileStickyBooking";
 import { tours } from "@/data/tours";
 import {
   ArrowLeft,
@@ -36,6 +37,10 @@ export default async function TourPage({
   return (
     <div className="min-h-screen bg-[#F4F4F0] text-[#1A1A1A]">
       <Navbar />
+      <MobileStickyBooking
+        tourName={tour.title}
+        price={tour.price.split(" ")[0]}
+      />
 
       {/* Hero Section */}
       <section className="relative h-[70vh] w-full mt-20">
@@ -178,7 +183,7 @@ export default async function TourPage({
 
               <div className="mb-8">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4 border-b pb-2">
-                  What's Included
+                  What&apos;s Included
                 </h4>
                 <ul className="space-y-3">
                   {tour.included.map((item, idx) => (
