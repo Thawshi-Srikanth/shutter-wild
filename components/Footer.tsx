@@ -65,6 +65,12 @@ export default function Footer() {
               Explore
             </h5>
             <a
+              href="/about"
+              className="block hover:text-white transition-colors"
+            >
+              About Us
+            </a>
+            <a
               href="/tours"
               className="block hover:text-white transition-colors"
             >
@@ -75,6 +81,9 @@ export default function Footer() {
               className="block hover:text-white transition-colors"
             >
               Gallery
+            </a>
+            <a href="/faq" className="block hover:text-white transition-colors">
+              FAQ
             </a>
           </div>
           <div className="space-y-3">

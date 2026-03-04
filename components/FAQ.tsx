@@ -3,57 +3,58 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, Minus } from "lucide-react";
+import Link from "next/link";
 
 const faqs = [
   {
-    question: "What Types Of Wildlife Photography Do You Offer?",
+    question: "Who are these expeditions suitable for?",
     answer:
-      "We offer a wide range of services including safari shoots, bird watching documentation, drone scouting, and night vision photography. We specialize in capturing animals in their natural habitats.",
+      "Our tours are suitable for passionate wildlife photographers — from serious enthusiasts to advanced shooters. You should be comfortable operating your camera manually and working in natural outdoor conditions. If you are unsure about suitability, we are happy to discuss your experience level before booking.",
   },
   {
-    question: "Can I Hire Wildsnap For A Specific Animal Project?",
+    question: "What level of photography experience is required?",
     answer:
-      "Yes, absolutely. We can tailor our expeditions to focus on specific species or regions. Contact us to discuss your specific requirements.",
+      "A good understanding of exposure (aperture, shutter speed, ISO) is recommended. These expeditions are photography-focused, and field conditions may require quick adjustments. Guidance will be provided throughout the trip.",
   },
   {
-    question: "Do You Offer Guided Wildlife Photography Tours?",
+    question: "What camera gear should I bring?",
     answer:
-      "Yes, we partner with experienced tour guides to offer guided photography tours. These are perfect for enthusiasts looking to learn from professionals in the field.",
+      "We recommend: A DSLR or mirrorless camera body, a telephoto lens (400mm or longer recommended for wildlife), spare batteries and memory cards, and weather-appropriate clothing. Detailed gear guidance will be provided prior to departure for each specific expedition.",
   },
   {
-    question: "Can I License Your Wildlife Images?",
+    question: "Are the tours ethical?",
     answer:
-      "Yes, our images are available for licensing for various uses including editorial, commercial, and educational purposes. Please check our licensing page for more details.",
+      "Yes. Ethical wildlife practice is at the core of ShutterWild Expeditions. We work with trusted local partners and follow responsible fieldcraft principles. Wildlife welfare always comes before photography.",
   },
   {
-    question: "Can I Collaborate With Wildsnap For Conservation Work?",
+    question: "How many participants are on each trip?",
     answer:
-      "We are passionate about conservation. We actively collaborate with NGOs and conservation groups to document and support their efforts.",
+      "Our expeditions are intentionally small — typically 3 to 6 participants — ensuring personalised attention and better photographic opportunities.",
   },
   {
-    question: "What Gear Do You Use For Your Shoots?",
+    question: "What is included in the expedition price?",
     answer:
-      "We use top-of-the-line equipment including high-resolution cameras, telephoto lenses, drones, and specialized night vision gear to ensure the best possible quality.",
+      "Inclusions vary by destination but typically include: Accommodation, Local ground transport, Photography guiding, and Access permits where required. Full inclusions and exclusions are listed on each expedition page.",
   },
   {
-    question: "What If Weather Conditions Change Suddenly?",
+    question: "Are international flights included?",
     answer:
-      "Wildlife photography often involves unpredictable weather. Our team is experienced in working in various conditions and we always have contingency plans.",
+      "No. International flights are not included unless explicitly stated. Participants are responsible for arranging their own flights to the designated meeting point.",
   },
   {
-    question: "Is It Safe To Join A Wildsnap Tour?",
+    question: "How physically demanding are the tours?",
     answer:
-      "Safety is our top priority. We work with certified guides and follow strict safety protocols to ensure a safe and enjoyable experience for everyone.",
+      "Some tours involve cold conditions, early mornings, or moderate walking in natural terrain. Specific details are provided on each expedition page so you can assess suitability.",
   },
   {
-    question: "Do You Offer Post-Processing Services?",
+    question: "What happens after I book?",
     answer:
-      "Yes, all our packages include professional post-processing to ensure your images are polished and ready for use.",
+      "Once your deposit is received, you will receive: A booking confirmation, A detailed itinerary, A preparation and gear guide, and A WhatsApp group link (if applicable). We remain available for support and preparation guidance before departure.",
   },
   {
-    question: "How Do I Book A Wildlife Shoot?",
+    question: "What is your cancellation policy?",
     answer:
-      "You can book a shoot by contacting us through our website or giving us a call. We'll discuss your needs and create a custom package for you.",
+      "A deposit is required to secure your place. Deposits are generally non-refundable unless the expedition is cancelled by us. Full cancellation terms are outlined in our Terms & Conditions.",
   },
 ];
 
@@ -71,9 +72,12 @@ export default function FAQ() {
             Everything You <span className="font-bold">NEED TO KNOW.</span>
           </h2>
         </div>
-        <button className="mt-8 md:mt-0 bg-[#2C3E2E] text-white px-8 py-3 text-xs font-bold uppercase tracking-wider hover:bg-[#1A261C] transition-colors">
-          Explore FAQs
-        </button>
+        <Link
+          href="/contact"
+          className="mt-8 md:mt-0 bg-[#2C3E2E] text-white px-8 py-3 text-xs font-bold uppercase tracking-wider hover:bg-[#1A261C] transition-colors inline-block"
+        >
+          Contact Us
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">

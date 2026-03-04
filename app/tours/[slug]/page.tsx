@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingActions from "@/components/BookingActions";
 import MobileStickyBooking from "@/components/MobileStickyBooking";
+import LightboxGallery from "@/components/LightboxGallery";
 import { tours } from "@/data/tours";
 import {
   ArrowLeft,
@@ -142,29 +143,7 @@ export default async function TourPage({
             </ul>
 
             {tour.gallery && tour.gallery.length > 0 && (
-              <>
-                <h2 className="font-serif text-3xl md:text-4xl mb-8">
-                  Expedition Gallery
-                </h2>
-                <div className="flex flex-col gap-4">
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {tour.gallery.map((image, idx) => (
-                      <div
-                        key={idx}
-                        className="relative aspect-square overflow-hidden bg-gray-100"
-                      >
-                        <Image
-                          src={image}
-                          alt={`${tour.title} gallery image ${idx + 1}`}
-                          fill
-                          className="object-cover hover:scale-105 transition-transform duration-500"
-                          sizes="(max-width: 768px) 50vw, 33vw"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
+              <LightboxGallery images={tour.gallery} tourTitle={tour.title} />
             )}
           </div>
 
