@@ -41,6 +41,7 @@ export default async function TourPage({
       <MobileStickyBooking
         tourName={tour.title}
         price={tour.price.split(" ")[0]}
+        slug={tour.slug}
       />
 
       {/* Hero Section */}
@@ -158,7 +159,7 @@ export default async function TourPage({
                 {tour.price.split(" ").slice(1).join(" ")}
               </div>
 
-              <BookingActions tourName={tour.title} />
+              <BookingActions tourName={tour.title} slug={tour.slug} />
 
               <div className="mb-8">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4 border-b pb-2">

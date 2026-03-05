@@ -1,19 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useBookingModal } from "@/components/BookingModalProvider";
+import Link from "next/link";
 
 interface MobileStickyBookingProps {
   tourName: string;
   price: string;
+  slug: string;
 }
 
 export default function MobileStickyBooking({
   tourName,
   price,
+  slug,
 }: MobileStickyBookingProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const { openModal } = useBookingModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,12 +37,12 @@ export default function MobileStickyBooking({
         </div>
         <div className="font-serif text-lg font-bold">{price}</div>
       </div>
-      <button
-        onClick={() => openModal(tourName)}
+      <Link
+        href={`/tours/${slug}/book`}
         className="bg-[#2C3E2E] text-white px-6 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#1A261C] transition-colors"
       >
         Book Now
-      </button>
+      </Link>
     </div>
   );
 }
