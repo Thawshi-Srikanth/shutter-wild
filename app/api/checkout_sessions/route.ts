@@ -23,6 +23,11 @@ export async function POST(req: Request) {
       ? tourImage
       : `${origin}${tourImage || ""}`;
 
+    if (imageUrl) {
+      // Stripe requires proper URL encoding (e.g. for spaces and non-ASCII chars)
+      imageUrl = encodeURI(imageUrl);
+    }
+
     if (imageUrl.includes("localhost") || imageUrl.includes("127.0.0.1")) {
       imageUrl = ""; // Clear to undefined to pass Stripe validation
     }
