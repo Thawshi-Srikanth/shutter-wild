@@ -34,6 +34,7 @@ export default async function BookingPage({
     priceAmount,
     formattedDeposit,
     depositAmount: tour.nonRefundableDeposit,
+    image: tour.image,
   };
 
   return (

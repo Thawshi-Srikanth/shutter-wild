@@ -80,7 +80,7 @@ export const tours: Tour[] = [
       "Tripod or gimbal head",
       "Proper winter clothing and footwear",
     ],
-    nonRefundableDeposit: 450,
+    nonRefundableDeposit: 500,
     image: "/captures/Norway Winter/golden-eagle-hunting-winter-norway.webp",
     gallery: [
       "/captures/Norway Winter/golden-eagle-close-up-winter-norway-2.webp",
@@ -284,7 +284,7 @@ export const tours: Tour[] = [
       "Bean bag or monopod for vehicle",
       "Tropical weather clothing",
     ],
-    nonRefundableDeposit: 800,
+    nonRefundableDeposit: 1000,
     image: "/captures/Sri Lanka/sri-lanka-leopard-yala.webp",
     gallery: [
       "/captures/Sri Lanka/asian-elephant-yala-national-park.webp",
@@ -366,7 +366,7 @@ export const tours: Tour[] = [
       "Tripod or monopod",
       "Waterproof clothing and boots",
     ],
-    nonRefundableDeposit: 450,
+    nonRefundableDeposit: 500,
     image: "/captures/Poland Winter/poland-winter-eagle-photography-2.webp",
     gallery: [
       "/captures/Poland Winter/common-buzzard-winter-poland.webp",
@@ -456,7 +456,7 @@ export const tours: Tour[] = [
       "Bean bag for vehicle support",
       "Dust protection for equipment",
     ],
-    nonRefundableDeposit: 750,
+    nonRefundableDeposit: 600,
     image: "/captures/India Tiger/bengal-tiger-walking-in-jungle-india.webp",
     gallery: [
       "/captures/India Tiger/bengal-tiger-close-portrait-india-2.webp",
@@ -530,7 +530,7 @@ export const tours: Tour[] = [
       "Tripod head or gimbal head (hide plate provided)",
       "Warm clothing",
     ],
-    nonRefundableDeposit: 400,
+    nonRefundableDeposit: 500,
     image:
       "/captures/Poland Autumn/white-tailed-eagle-golden-light-poland.webp",
     gallery: [
@@ -608,7 +608,7 @@ export const tours: Tour[] = [
       "Sun protection and tropical clothing",
       "Waterproof bags for boat",
     ],
-    nonRefundableDeposit: 1200,
+    nonRefundableDeposit: 1500,
     image: "/captures/Pantanal Jaguar/jaguar-in-golden-light-pantanal.webp",
     gallery: [
       "/captures/Pantanal Jaguar/black-collared-hawk-catching-fish-pantanal.webp",

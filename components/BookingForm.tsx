@@ -13,6 +13,7 @@ type TourSummary = {
   priceAmount: string;
   formattedDeposit: string;
   depositAmount: number;
+  image: string;
 };
 
 interface BookingFormProps {
@@ -186,6 +187,9 @@ export default function BookingForm({ tour }: BookingFormProps) {
         body: JSON.stringify({
           amount: tour.depositAmount,
           tourTitle: tour.title,
+          tourDate: tour.date,
+          tourImage: tour.image,
+          customerEmail: data.email,
         }),
       });
 
