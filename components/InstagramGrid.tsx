@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { Instagram } from "lucide-react";
+import { FaInstagram } from "react-icons/fa";
 
 // Mocking the feed with visually stunning placeholders
 const instaPosts = [
@@ -31,7 +31,7 @@ export default function InstagramGrid() {
             className="hover:text-gray-600 transition-colors flex items-center justify-center gap-4"
           >
             @thineshtphotography{" "}
-            <Instagram size={36} className="text-gray-400" />
+            <FaInstagram size={36} className="text-gray-400" />
           </a>
         </h2>
       </div>
@@ -60,7 +60,7 @@ export default function InstagramGrid() {
 
             {/* Hover overlay with Instagram Icon */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-              <Instagram
+              <FaInstagram
                 size={32}
                 className="text-white transform scale-50 group-hover:scale-100 transition-transform duration-300"
               />

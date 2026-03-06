@@ -5,6 +5,9 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CookieBanner from "@/components/CookieBanner";
 import { BookingModalProvider } from "@/components/BookingModalProvider";
 import { NewsletterModalProvider } from "@/components/NewsletterModalProvider";
+import ImageProtector from "@/components/ImageProtector";
+import WhatsAppButton from "@/components/WhatsAppButton";
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
@@ -37,8 +40,10 @@ export default function RootLayout({
       >
         <NewsletterModalProvider>
           <BookingModalProvider>
+            <ImageProtector />
             <SmoothScroll>{children}</SmoothScroll>
             <CookieBanner />
+            <WhatsAppButton />
           </BookingModalProvider>
         </NewsletterModalProvider>
       </body>

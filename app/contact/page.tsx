@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 export const metadata = {
   title: "Contact Us | ShutterWild",
@@ -67,10 +68,10 @@ export default function ContactPage() {
                     Mon-Fri from 9am to 6pm GMT.
                   </p>
                   <a
-                    href="tel:+447901234567"
+                    href="tel:+447557763222"
                     className="font-bold hover:text-gray-500 transition-colors"
                   >
-                    +44 790 123 4567
+                    07557 763222
                   </a>
                 </div>
               </div>
@@ -103,7 +104,7 @@ export default function ContactPage() {
                   className="bg-[#1A1A1A] text-white p-3 rounded-full hover:bg-gray-800 transition-colors"
                   aria-label="Facebook"
                 >
-                  <Facebook size={20} />
+                  <FaFacebook size={20} />
                 </a>
                 <a
                   href="https://www.instagram.com/thineshtphotography"
@@ -112,7 +113,7 @@ export default function ContactPage() {
                   className="bg-[#1A1A1A] text-white p-3 rounded-full hover:bg-gray-800 transition-colors"
                   aria-label="Instagram"
                 >
-                  <Instagram size={20} />
+                  <FaInstagram size={20} />
                 </a>
               </div>
             </div>

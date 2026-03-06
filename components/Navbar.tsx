@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
@@ -140,16 +141,18 @@ export default function Navbar() {
                   Social
                 </h4>
                 <a
-                  href="#"
-                  className="block hover:text-white transition-colors"
+                  href="https://www.instagram.com/thineshtphotography"
+                  target="_blank"
+                  className="flex items-center gap-2 hover:text-white transition-colors mb-2"
                 >
-                  Instagram
+                  <FaInstagram size={18} /> Instagram
                 </a>
                 <a
-                  href="#"
-                  className="block hover:text-white transition-colors"
+                  href="https://www.facebook.com/thinesht"
+                  target="_blank"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  Facebook
+                  <FaFacebook size={18} /> Facebook
                 </a>
               </div>
             </motion.div>

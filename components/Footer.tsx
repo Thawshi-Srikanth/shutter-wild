@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Facebook, Instagram, Mail, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 
 export default function Footer() {
@@ -48,13 +49,13 @@ export default function Footer() {
               href="https://www.facebook.com/thinesht"
               className="hover:text-gray-300 transition-colors"
             >
-              <Facebook size={20} />
+              <FaFacebook size={20} />
             </a>
             <a
               href="https://www.instagram.com/thineshtphotography"
               className="hover:text-gray-300 transition-colors"
             >
-              <Instagram size={20} />
+              <FaInstagram size={20} />
             </a>
           </div>
         </div>
@@ -131,11 +132,21 @@ export default function Footer() {
           <div className="flex gap-8 mb-2">
             <div className="flex items-center gap-2">
               <Phone size={14} />
-              <span>474 - 937 - 8270</span>
+              <a
+                href="tel:+447557763222"
+                className="hover:text-white transition-colors"
+              >
+                07557 763222
+              </a>
             </div>
             <div className="flex items-center gap-2">
               <Mail size={14} />
-              <span>mail@yoursite.com</span>
+              <a
+                href="mailto:hello@shutterwild.com"
+                className="hover:text-white transition-colors"
+              >
+                hello@shutterwild.com
+              </a>
             </div>
           </div>
           <div className="text-[10px] text-white/30 flex flex-col gap-0.5 mt-2">

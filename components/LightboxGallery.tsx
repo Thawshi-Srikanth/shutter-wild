@@ -8,11 +8,13 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 interface LightboxGalleryProps {
   images: string[];
   tourTitle: string;
+  hideHeader?: boolean;
 }
 
 export default function LightboxGallery({
   images,
   tourTitle,
+  hideHeader = false,
 }: LightboxGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -91,9 +93,11 @@ export default function LightboxGallery({
   return (
     <>
       {/* Grid Display */}
-      <h2 className="font-serif text-3xl md:text-4xl mb-8">
-        Expedition Gallery
-      </h2>
+      {!hideHeader && (
+        <h2 className="font-serif text-3xl md:text-4xl mb-8">
+          Expedition Gallery
+        </h2>
+      )}
       <div className="flex flex-col gap-4 mb-16">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((image, idx) => (

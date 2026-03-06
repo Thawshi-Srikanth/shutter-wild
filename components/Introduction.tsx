@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Introduction() {
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24 bg-white text-[#1A1A1A]">
+    <section className="py-24 px-6 md:px-12 lg:px-24 bg-white text-[#1A1A1A] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
