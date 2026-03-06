@@ -154,20 +154,20 @@ export default function Navbar() {
                 <h4 className="font-bold text-white uppercase tracking-wider mb-4 text-xs">
                   Social
                 </h4>
-                <a
+                <Link
                   href="https://www.instagram.com/thineshtphotography"
                   target="_blank"
                   className="flex items-center gap-2 hover:text-white transition-colors mb-2"
                 >
                   <FaInstagram size={18} /> Instagram
-                </a>
-                <a
+                </Link>
+                <Link
                   href="https://www.facebook.com/thinesht"
                   target="_blank"
                   className="flex items-center gap-2 hover:text-white transition-colors"
                 >
                   <FaFacebook size={18} /> Facebook
-                </a>
+                </Link>
               </div>
             </motion.div>
           </motion.div>

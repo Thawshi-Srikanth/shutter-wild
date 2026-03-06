@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Introduction() {
   return (
@@ -81,12 +82,12 @@ export default function Introduction() {
               ))}
             </ul>
             <div className="mt-12">
-              <a
-                href="#tours"
+              <Link
+                href="/tours"
                 className="inline-block border border-black px-8 py-3 text-xs font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-colors duration-300"
               >
                 Explore Our Tours
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>

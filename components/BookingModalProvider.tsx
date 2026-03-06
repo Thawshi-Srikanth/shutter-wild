@@ -4,6 +4,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Check } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface BookingModalContextType {
   openModal: (tourName: string) => void;
@@ -206,21 +207,21 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
                       className="text-sm text-gray-600 cursor-pointer select-none"
                     >
                       I accept the{" "}
-                      <a
+                      <Link
                         href="/terms-of-service"
                         className="text-black underline hover:text-gray-600 transition-colors"
                         target="_blank"
                       >
                         Terms and Conditions
-                      </a>{" "}
+                      </Link>{" "}
                       and{" "}
-                      <a
+                      <Link
                         href="/privacy-policy"
                         className="text-black underline hover:text-gray-600 transition-colors"
                         target="_blank"
                       >
                         Privacy Policy
-                      </a>
+                      </Link>
                     </label>
                   </div>
 

@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { FaInstagram } from "react-icons/fa";
 
 // Mocking the feed with visually stunning placeholders
@@ -24,7 +25,7 @@ export default function InstagramGrid() {
           [ Follow The Journey ]
         </span>
         <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium mb-6">
-          <a
+          <Link
             href="https://www.instagram.com/thineshtphotography"
             target="_blank"
             rel="noopener noreferrer"
@@ -32,7 +33,7 @@ export default function InstagramGrid() {
           >
             @thineshtphotography{" "}
             <FaInstagram size={36} className="text-gray-400" />
-          </a>
+          </Link>
         </h2>
       </div>
 
@@ -70,14 +71,14 @@ export default function InstagramGrid() {
       </div>
 
       <div className="flex justify-center mt-12">
-        <a
+        <Link
           href="https://www.instagram.com/thineshtphotography"
           target="_blank"
           rel="noopener noreferrer"
           className="border border-black px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 w-fit"
         >
           View Full Gallery on Instagram
-        </a>
+        </Link>
       </div>
     </section>
   );

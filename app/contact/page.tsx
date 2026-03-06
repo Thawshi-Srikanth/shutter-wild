@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import Link from "next/link";
 
 export const metadata = {
   title: "Contact Us | ShutterWild",
@@ -47,12 +48,12 @@ export default function ContactPage() {
                   <p className="text-gray-600 mb-2">
                     For general inquiries and booking.
                   </p>
-                  <a
+                  <Link
                     href="mailto:hello@shutterwild.com"
-                    className="font-bold hover:text-gray-500 transition-colors"
+                    className="font-bold hover:Stext-gray-500 transition-colors"
                   >
                     hello@shutterwild.com
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -67,12 +68,12 @@ export default function ContactPage() {
                   <p className="text-gray-600 mb-2">
                     Mon-Fri from 9am to 6pm GMT.
                   </p>
-                  <a
+                  <Link
                     href="tel:+447557763222"
                     className="font-bold hover:text-gray-500 transition-colors"
                   >
                     07557 763222
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -97,7 +98,7 @@ export default function ContactPage() {
             <div className="pt-8 border-t border-black/10">
               <h3 className="font-serif text-2xl font-medium mb-6">Socials</h3>
               <div className="flex gap-4">
-                <a
+                <Link
                   href="https://www.facebook.com/thinesht"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -105,8 +106,8 @@ export default function ContactPage() {
                   aria-label="Facebook"
                 >
                   <FaFacebook size={20} />
-                </a>
-                <a
+                </Link>
+                <Link
                   href="https://www.instagram.com/thineshtphotography"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -114,7 +115,7 @@ export default function ContactPage() {
                   aria-label="Instagram"
                 >
                   <FaInstagram size={20} />
-                </a>
+                </Link>
               </div>
             </div>
           </div>

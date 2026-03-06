@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Mail, Phone } from "lucide-react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -54,18 +55,18 @@ export default function Footer() {
           </div>
           <h4 className="font-serif text-xl mb-6">Find And Follow Us</h4>
           <div className="flex gap-4">
-            <a
+            <Link
               href="https://www.facebook.com/thinesht"
               className="hover:text-gray-300 transition-colors"
             >
               <FaFacebook size={20} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.instagram.com/thineshtphotography"
               className="hover:text-gray-300 transition-colors"
             >
               <FaInstagram size={20} />
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -74,44 +75,47 @@ export default function Footer() {
             <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">
               Explore
             </h5>
-            <a
+            <Link
               href="/about"
               className="block hover:text-white transition-colors"
             >
               About Us
-            </a>
-            <a
+            </Link>
+            <Link
               href="/tours"
               className="block hover:text-white transition-colors"
             >
               Expeditions
-            </a>
-            <a
+            </Link>
+            <Link
               href="/gallery"
               className="block hover:text-white transition-colors"
             >
               Gallery
-            </a>
-            <a href="/faq" className="block hover:text-white transition-colors">
+            </Link>
+            <Link
+              href="/faq"
+              className="block hover:text-white transition-colors"
+            >
               FAQ
-            </a>
+            </Link>
           </div>
           <div className="space-y-3">
             <h5 className="text-white font-bold uppercase text-xs tracking-wider mb-4">
               Connect
             </h5>
-            <a
+            <Link
               href="/contact"
               className="block hover:text-white transition-colors"
             >
               Contact Us
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.instagram.com/thineshtphotography"
               className="block hover:text-white transition-colors"
             >
               Instagram
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -141,21 +145,21 @@ export default function Footer() {
           <div className="flex gap-8 mb-2">
             <div className="flex items-center gap-2">
               <Phone size={14} />
-              <a
+              <Link
                 href="tel:+447557763222"
                 className="hover:text-white transition-colors"
               >
                 07557 763222
-              </a>
+              </Link>
             </div>
             <div className="flex items-center gap-2">
               <Mail size={14} />
-              <a
+              <Link
                 href="mailto:hello@shutterwild.com"
                 className="hover:text-white transition-colors"
               >
                 hello@shutterwild.com
-              </a>
+              </Link>
             </div>
           </div>
           <div className="text-[10px] text-white/30 flex flex-col gap-0.5 mt-2">
@@ -167,24 +171,24 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-6">
-          <a
+          <Link
             href="/privacy-policy"
             className="hover:text-white transition-colors"
           >
             Privacy Policy
-          </a>
-          <a
+          </Link>
+          <Link
             href="/cookie-policy"
             className="hover:text-white transition-colors"
           >
             Cookie Policy
-          </a>
-          <a
+          </Link>
+          <Link
             href="/terms-of-service"
             className="hover:text-white transition-colors"
           >
             Terms of Service
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
