@@ -15,6 +15,10 @@ const TOURS_PER_PAGE = 6;
 export default function ToursPage() {
   const [activeYear, setActiveYear] = useState<string>("All");
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [priceSort, setPriceSort] = useState<string>("");
+  const [maxGroupSize, setMaxGroupSize] = useState<string>("All");
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
   // Extract unique years from tour dates
   const availableYears = useMemo(() => {
@@ -29,15 +33,54 @@ export default function ToursPage() {
     return Array.from(years).sort(); // Sort ascending
   }, []);
 
-  // Filter tours
+  // Filter and sort tours
   const filteredTours = useMemo(() => {
-    if (activeYear === "All") return tours;
+    let result = tours;
 
-    return tours.filter((tour) => {
-      const yearMatch = tour.date.match(/\b(20\d{2})\b/);
-      return yearMatch && yearMatch[1] === activeYear;
-    });
-  }, [activeYear]);
+    // 1. Filter by Year
+    if (activeYear !== "All") {
+      result = result.filter((tour) => {
+        const yearMatch = tour.date.match(/\b(20\d{2})\b/);
+        return yearMatch && yearMatch[1] === activeYear;
+      });
+    }
+
+    // 2. Filter by Search Query
+    if (searchQuery.trim() !== "") {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(
+        (tour) =>
+          tour.title.toLowerCase().includes(query) ||
+          tour.location.toLowerCase().includes(query),
+      );
+    }
+
+    // 3. Filter by Max Group Size
+    if (maxGroupSize !== "All") {
+      const sizeParam = parseInt(maxGroupSize, 10);
+      result = result.filter((tour) => {
+        if (sizeParam === 6) {
+          return tour.maxPhotographers >= 6;
+        }
+        return tour.maxPhotographers === sizeParam;
+      });
+    }
+
+    // 4. Sort by Price
+    if (priceSort) {
+      result = [...result].sort((a, b) => {
+        // Parse prices, assuming format like "£1,750 per person"
+        const priceA = parseInt(a.price.replace(/[^\d]/g, ""), 10) || 0;
+        const priceB = parseInt(b.price.replace(/[^\d]/g, ""), 10) || 0;
+
+        if (priceSort === "low-to-high") return priceA - priceB;
+        if (priceSort === "high-to-low") return priceB - priceA;
+        return 0;
+      });
+    }
+
+    return result;
+  }, [activeYear, searchQuery, maxGroupSize, priceSort]);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredTours.length / TOURS_PER_PAGE);
@@ -57,7 +100,7 @@ export default function ToursPage() {
       <Navbar />
 
       {/* Header */}
-      <section className="pt-32 pb-12 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+      <section className="pt-32 pb-12 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto flex flex-col items-start">
         <span className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4 block">
           [ Our Journeys ]
         </span>
@@ -73,11 +116,50 @@ export default function ToursPage() {
           portfolio-worthy images.
         </p>
 
-        {/* Filter Section */}
+        {/* Filter Trigger Button */}
+        <button
+          onClick={() => setIsFilterOpen(true)}
+          className="border border-[#1A1A1A] px-6 py-3 text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-[#1A1A1A] hover:text-white transition-colors"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+            />
+          </svg>
+          Filter Expeditions
+        </button>
+
+        {/* Filter Drawer */}
         <ToursFilter
+          isOpen={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
           years={availableYears}
           activeYear={activeYear}
           onYearChange={handleYearChange}
+          searchQuery={searchQuery}
+          onSearchChange={(q) => {
+            setSearchQuery(q);
+            setCurrentPage(1);
+          }}
+          priceSort={priceSort}
+          onPriceSortChange={(s) => {
+            setPriceSort(s);
+            setCurrentPage(1);
+          }}
+          maxGroupSize={maxGroupSize}
+          onGroupSizeChange={(s) => {
+            setMaxGroupSize(s);
+            setCurrentPage(1);
+          }}
         />
       </section>
 
