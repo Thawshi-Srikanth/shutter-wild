@@ -155,9 +155,23 @@ export default async function TourPage({
               <div className="text-4xl font-serif mb-2">
                 {tour.price.split(" ")[0]}
               </div>
-              <div className="text-gray-500 text-sm mb-8">
+              <div className="text-gray-500 text-sm mb-6">
                 {tour.price.split(" ").slice(1).join(" ")}
               </div>
+
+              {tour.nonRefundableDeposit && (
+                <div className="bg-[#F4F4F0] p-4 border-l-2 border-black mb-8">
+                  <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">
+                    Non-Refundable Deposit
+                  </div>
+                  <div className="text-xl font-serif font-medium text-black">
+                    £{tour.nonRefundableDeposit}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Required to secure your booking
+                  </div>
+                </div>
+              )}
 
               <BookingActions tourName={tour.title} slug={tour.slug} />
 
