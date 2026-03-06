@@ -43,6 +43,15 @@ export default function Footer() {
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-white/10 pt-12">
         <div>
+          <div className="mb-8">
+            <Image
+              src="/logos/shutter-wild-white.png"
+              alt="Shutter Wild Logo"
+              width={240}
+              height={60}
+              className="h-10 md:h-12 lg:h-14 w-auto object-contain"
+            />
+          </div>
           <h4 className="font-serif text-xl mb-6">Find And Follow Us</h4>
           <div className="flex gap-4">
             <a

@@ -105,24 +105,27 @@ export function NewsletterModalProvider({ children }: { children: ReactNode }) {
               </div>
 
               {/* Content Section */}
-              <div className="relative w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                <div className="mb-8">
-                  <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4 block">
+              <div className="relative w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center items-center text-center md:items-start md:text-left">
+                <div className="mb-6 md:mb-8">
+                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/50 mb-3 md:mb-4 block">
                     [ Join The Pack ]
                   </span>
-                  <h3 className="font-serif text-3xl md:text-4xl text-white mb-4 leading-tight">
+                  <h3 className="font-serif text-2xl md:text-4xl text-white mb-3 md:mb-4 leading-tight">
                     Capture The <br className="hidden md:block" />
                     <span className="italic text-white/80">Wildest</span>{" "}
                     Moments.
                   </h3>
-                  <p className="text-sm text-white/60 leading-relaxed">
+                  <p className="text-xs md:text-sm text-white/60 leading-relaxed">
                     Sign up to receive stunning wildlife imagery, field notes,
                     and exclusive seasonal booking updates directly to your
                     inbox.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-3 md:gap-4 w-full"
+                >
                   <div className="relative">
                     <Mail
                       className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40"

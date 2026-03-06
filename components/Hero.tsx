@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   const { scrollYProgress } = useScroll({
@@ -19,11 +20,11 @@ export default function Hero() {
           src="/captures/Sri Lanka/sri-lanka-leopard-yala.webp"
           alt="Wildlife Background"
           fill
-          className="object-cover opacity-60"
+          className="object-cover opacity-60 object-[15%_10%] md:object-center"
           priority
           unoptimized
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50  to-black/60" />
       </motion.div>
 
       <div className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
@@ -31,7 +32,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.1] mb-6"
+          className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-6"
         >
           Immersive Wildlife Photography <br />
           Expeditions Across the UK &{" "}
@@ -57,12 +58,12 @@ export default function Hero() {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="flex flex-wrap gap-4"
         >
-          <a
-            href="#tours"
+          <Link
+            href="/tours"
             className="bg-white text-black px-8 py-4 text-xs font-bold uppercase tracking-wider hover:bg-gray-200 transition-colors flex items-center gap-2"
           >
             View Upcoming Expeditions <ArrowRight size={16} />
-          </a>
+          </Link>
         </motion.div>
       </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -48,16 +49,22 @@ export default function Navbar() {
 
   let navClasses = "";
 
+  let useWhiteLogo = false;
+
   if (isOpen) {
     navClasses = "bg-transparent text-white";
+    useWhiteLogo = true;
   } else if (scrolled) {
     navClasses = "bg-[#F4F4F0]/90 backdrop-blur-md text-[#1A1A1A]";
+    useWhiteLogo = false;
   } else if (hasDarkHero) {
     // Default for top of Home and Tour Detail pages (dark hero)
     navClasses = "bg-transparent text-white";
+    useWhiteLogo = true;
   } else {
     // Any other page without a hero image has a light background
     navClasses = "bg-transparent text-[#1A1A1A]";
+    useWhiteLogo = false;
   }
 
   const closeMenu = () => setIsOpen(false);
@@ -67,12 +74,19 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center transition-all duration-300 ${navClasses}`}
       >
-        <Link
-          href="/"
-          onClick={closeMenu}
-          className="text-2xl font-serif font-bold tracking-tighter relative z-[60]"
-        >
-          SHUTTER WILD
+        <Link href="/" onClick={closeMenu} className="relative z-[60]">
+          <Image
+            src={
+              useWhiteLogo
+                ? "/logos/shutter-wild-white.png"
+                : "/logos/shutter-wild-green.png"
+            }
+            alt="Shutter Wild"
+            width={240}
+            height={60}
+            className="h-8 md:h-10 lg:h-12 w-auto object-contain transition-all duration-300"
+            priority
+          />
         </Link>
 
         <button
@@ -92,7 +106,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 bg-[#1A1A1A] flex flex-col justify-center px-6 md:px-24"
+            className="fixed inset-0 z-40 bg-[#1A1A1A] flex flex-col justify-top pt-24 px-6 md:px-24 overflow-y-auto"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
               {navLinks.map((link, i) => (
@@ -113,7 +127,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className="font-serif text-5xl md:text-6xl lg:text-7xl text-white hover:text-gray-400 transition-colors inline-block"
+                      className="font-serif text-4xl md:text-6xl lg:text-7xl text-white hover:text-gray-400 transition-colors inline-block"
                     >
                       {link.name}
                     </Link>
