@@ -133,6 +133,9 @@ export default function LightboxGallery({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center backdrop-blur-sm"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
           >
             {/* Top Bar for close and count */}
             <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50">
@@ -155,9 +158,6 @@ export default function LightboxGallery({
                 // Close if clicked on the backdrop, not the image or buttons
                 if (e.target === e.currentTarget) closeLightbox();
               }}
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
             >
               <AnimatePresence mode="wait">
                 <motion.div
