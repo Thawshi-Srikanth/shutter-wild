@@ -10,6 +10,7 @@ export default function ExperienceScroll() {
   const targetRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollRange, setScrollRange] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -18,6 +19,8 @@ export default function ExperienceScroll() {
 
   useEffect(() => {
     const updateRange = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint is 1024px
+
       if (scrollContainerRef.current) {
         // Total width of the horizonal scrolling container minus the viewport width.
         // This gives the exact number of pixels we need to shift left to reach the end.
@@ -38,12 +41,12 @@ export default function ExperienceScroll() {
   return (
     <section
       ref={targetRef}
-      // Increased height to 600vh to make the scroll speed slower and smoother
-      className="relative h-[600vh] bg-[#F4F4F0] text-[#1A1A1A]"
+      // Increased height to 600vh for desktop, auto for mobile
+      className={`relative lg:h-[600vh] h-auto bg-[#F4F4F0] text-[#1A1A1A]`}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
+      <div className="lg:sticky lg:top-0 lg:h-screen w-full lg:overflow-hidden flex flex-col justify-center py-20 lg:py-0">
         {/* Header absolute positioned at top, like original design */}
-        <div className="absolute top-24 left-6 md:left-12 lg:left-24 z-10 w-full max-w-xl pointer-events-none">
+        <div className="lg:absolute lg:top-24 px-6 md:px-12 lg:px-24 z-10 w-full max-w-xl pointer-events-none mb-12 lg:mb-0">
           <span className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2 block">
             [ Join Our Journeys ]
           </span>
@@ -54,15 +57,15 @@ export default function ExperienceScroll() {
 
         <motion.div
           ref={scrollContainerRef}
-          style={{ x }}
-          // Added mt-32 md:mt-48 to push cards down so they don't overlap the absolute header
-          className="flex w-max items-center pl-6 md:pl-12 lg:pl-24 gap-6 md:gap-12 pr-[10vw] mt-32 md:mt-48"
+          style={{ x: isMobile ? 0 : x }}
+          // Updated for mobile: horizontal swipe with snapping
+          className="flex flex-row w-full lg:w-max items-center lg:items-center px-6 md:px-12 lg:pl-24 gap-6 md:gap-12 lg:gap-12 lg:pr-[10vw] lg:mt-48 overflow-x-auto lg:overflow-visible snap-x snap-mandatory scrollbar-hide"
         >
           {tours.map((tour) => (
             <Link
               href={`/tours/${tour.slug}`}
               key={tour.id}
-              className="w-[85vw] md:w-[60vw] lg:w-[45vw] flex-shrink-0 h-[50vh] md:h-[60vh] flex flex-col justify-end relative rounded-sm overflow-hidden group"
+              className="w-[85vw] md:w-[60vw] lg:w-[45vw] flex-shrink-0 h-[60vh] md:h-[70vh] lg:h-[60vh] flex flex-col justify-end relative rounded-sm overflow-hidden group snap-center"
             >
               <Image
                 src={tour.image}

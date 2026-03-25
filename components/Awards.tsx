@@ -5,24 +5,19 @@ import Image from "next/image";
 
 const awards = [
   {
-    year: "2025",
-    category: "Nature Lens",
-    title: "Best Jungle Wildlife Capture",
+    year: "2026",
+    category: "Animal Behaviour",
+    title: "Winter Yawn",
   },
   {
-    year: "2024",
-    category: "Bird World",
-    title: "Outstanding Avian Flight Image",
+    year: "2026",
+    category: "Animal Portraits",
+    title: "Grace on the Water",
   },
   {
-    year: "2023",
-    category: "Wild Frame",
-    title: "Top Savanna Wildlife Scene",
-  },
-  {
-    year: "2023",
-    category: "Wild Expo",
-    title: "Award-Winning Elephant Group Shot",
+    year: "2026",
+    category: "Black & White",
+    title: "Morning Serenade",
   },
 ];
 
@@ -34,7 +29,8 @@ export default function Awards() {
           [ Award Winning ]
         </span>
         <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium">
-          Celebrating Frames <span className="font-bold">THAT INSPIRE.</span>
+          British Wildlife Photography{" "}
+          <span className="font-bold">AWARDS 2026</span>
         </h2>
       </div>
 
