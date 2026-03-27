@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Check } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { PhoneInput } from "./PhoneInput";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 type TourSummary = {
   title: string;
@@ -79,9 +80,7 @@ const bookingSchema = z
         (val) => val === true,
         "You must acknowledge the insurance requirement",
       ),
-    captcha: z
-      .boolean()
-      .refine((val) => val === true, "Please complete the CAPTCHA"),
+    captcha: z.string().min(1, "Please complete the Cloudflare verification"),
   })
   .superRefine(({ confirmEmail, email }, ctx) => {
     if (confirmEmail !== email) {
@@ -97,6 +96,7 @@ type BookingFormData = z.infer<typeof bookingSchema>;
 
 export default function BookingForm({ tour }: BookingFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const isDev = process.env.NODE_ENV === "development";
   const devDefaults = isDev
@@ -125,7 +125,7 @@ export default function BookingForm({ tour }: BookingFormProps) {
         emPostCode: "SW1A 1AA",
         agreeTerms: true,
         agreeInsurance: true,
-        captcha: true,
+        captcha: "dummy-token",
       }
     : {};
 
@@ -134,6 +134,8 @@ export default function BookingForm({ tour }: BookingFormProps) {
     handleSubmit,
     control,
     trigger,
+    setValue,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema) as any,
@@ -144,7 +146,7 @@ export default function BookingForm({ tour }: BookingFormProps) {
       singleSupplement: false,
       agreeTerms: false,
       agreeInsurance: false,
-      captcha: false,
+      captcha: "",
       ...devDefaults,
     },
   });
@@ -195,18 +197,51 @@ export default function BookingForm({ tour }: BookingFormProps) {
     const isStepValid = await trigger(fieldsToValidate);
     if (isStepValid && currentStep < STEPS.length - 1) {
       setCurrentStep((curr) => curr + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Delay slightly to allow React to render the new step,
+      // and use 'auto' (instant) to instantly override any user scroll momentum
+      setTimeout(() => {
+        const y =
+          (formRef.current?.getBoundingClientRect().top || 0) +
+          window.scrollY -
+          100;
+        window.scrollTo({ top: y, behavior: "auto" });
+      }, 50);
+    } else if (!isStepValid) {
+      // Find the first field with an error and scroll to it so the user sees it
+      setTimeout(() => {
+        const firstError = formRef.current?.querySelector(".text-red-500");
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 100);
     }
   };
 
   const handleBack = () => {
     if (currentStep > 0) {
       setCurrentStep((curr) => curr - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        const y =
+          (formRef.current?.getBoundingClientRect().top || 0) +
+          window.scrollY -
+          100;
+        window.scrollTo({ top: y, behavior: "auto" });
+      }, 50);
     }
   };
 
   const [isRedirecting, setIsRedirecting] = useState(false);
+
+  const onInvalid = () => {
+    setTimeout(() => {
+      const firstError = formRef.current?.querySelector(".text-red-500");
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 100);
+  };
 
   const onSubmit = async (data: BookingFormData) => {
     try {
@@ -224,6 +259,7 @@ export default function BookingForm({ tour }: BookingFormProps) {
           tourDate: tour.date,
           tourImage: tour.image,
           customerEmail: data.email,
+          captchaToken: data.captcha,
         }),
       });
 
@@ -285,7 +321,8 @@ export default function BookingForm({ tour }: BookingFormProps) {
       </div>
 
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        ref={formRef}
+        onSubmit={handleSubmit(onSubmit, onInvalid)}
         className="bg-white p-8 md:p-12 border border-gray-100 shadow-sm min-h-[500px] flex flex-col"
       >
         <div className="flex-1">
@@ -981,36 +1018,21 @@ export default function BookingForm({ tour }: BookingFormProps) {
                   </p>
                 )}
 
-                {/* Captcha Placeholder */}
+                {/* Cloudflare Turnstile */}
                 <div className="pt-6 mt-6 border-t border-gray-100 flex flex-col gap-2">
                   <span className="text-sm text-gray-600 font-bold">
-                    Please complete the reCAPTCHA below*
+                    Please complete the verification below*
                   </span>
-                  <div className="bg-gray-100 w-full max-w-[300px] h-20 flex items-center justify-center border border-gray-300 relative">
-                    <span className="text-gray-400 text-sm">
-                      CAPTCHA Placeholder
-                    </span>
-                    {/* Simulated Checkbox for validation since it's just a placeholder for now */}
-                    <input
-                      type="checkbox"
-                      {...register("captcha")}
-                      className="absolute top-2 right-2 w-4 h-4 cursor-pointer opacity-0"
-                      title="Click to verify (Demo)"
-                    />
-                    {/* Visual Check for the demo captcha */}
-                    <Controller
-                      name="captcha"
-                      control={control}
-                      render={({ field }) => (
-                        <div
-                          className={`absolute left-4 w-6 h-6 border bg-white flex items-center justify-center cursor-pointer ${field.value ? "border-green-500" : "border-gray-300"}`}
-                          onClick={() => field.onChange(!field.value)}
-                        >
-                          {field.value && (
-                            <Check size={16} className="text-green-500" />
-                          )}
-                        </div>
-                      )}
+                  <div className="w-full">
+                    <Turnstile
+                      siteKey={
+                        process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+                        "1x00000000000000000000AA"
+                      }
+                      onSuccess={(token) => {
+                        setValue("captcha", token, { shouldValidate: true });
+                        clearErrors("captcha");
+                      }}
                     />
                   </div>
                   {errors.captcha && (
