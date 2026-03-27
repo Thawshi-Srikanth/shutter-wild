@@ -5,8 +5,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function POST(req: Request) {
   try {
-    const { amount, tourTitle, tourDate, tourImage, customerEmail } =
-      await req.json();
+    const body = await req.json();
+    const {
+      amount,
+      tourTitle,
+      tourDate,
+      tourImage,
+      customerEmail,
+      tourId,
+      tourSlug,
+    } = body;
 
     if (!amount || !tourTitle) {
       return NextResponse.json(
@@ -55,6 +63,10 @@ export async function POST(req: Request) {
       mode: "payment",
       allow_promotion_codes: true,
       customer_email: customerEmail,
+      metadata: {
+        tourId: tourId || tourTitle,
+        tourSlug: tourSlug || "",
+      },
       success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/booking/cancel`,
     });

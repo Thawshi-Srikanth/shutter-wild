@@ -30,6 +30,7 @@ export default async function BookingPage({
 
   const tourSummary = {
     title: tour.title,
+    slug: tour.slug,
     date: tour.date,
     priceAmount,
     formattedDeposit,

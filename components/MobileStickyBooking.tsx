@@ -7,14 +7,17 @@ interface MobileStickyBookingProps {
   tourName: string;
   price: string;
   slug: string;
+  availableSlots?: number;
 }
 
 export default function MobileStickyBooking({
   tourName,
   price,
   slug,
+  availableSlots,
 }: MobileStickyBookingProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const isFullyBooked = availableSlots === 0;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,12 +40,18 @@ export default function MobileStickyBooking({
         </div>
         <div className="font-serif text-lg font-bold">{price}</div>
       </div>
-      <Link
-        href={`/tours/${slug}/book`}
-        className="bg-[#2C3E2E] text-white px-6 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#1A261C] transition-colors"
-      >
-        Book Now
-      </Link>
+      {isFullyBooked ? (
+        <div className="bg-gray-400 text-white px-6 py-2.5 text-xs font-bold uppercase tracking-widest cursor-not-allowed">
+          Fully Booked
+        </div>
+      ) : (
+        <Link
+          href={`/tours/${slug}/book`}
+          className="bg-[#2C3E2E] text-white px-6 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#1A261C] transition-colors"
+        >
+          Book Now
+        </Link>
+      )}
     </div>
   );
 }

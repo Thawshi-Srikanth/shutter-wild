@@ -9,6 +9,7 @@ import { PhoneInput } from "./PhoneInput";
 
 type TourSummary = {
   title: string;
+  slug: string;
   date: string;
   priceAmount: string;
   formattedDeposit: string;
@@ -97,6 +98,37 @@ type BookingFormData = z.infer<typeof bookingSchema>;
 export default function BookingForm({ tour }: BookingFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
 
+  const isDev = process.env.NODE_ENV === "development";
+  const devDefaults = isDev
+    ? {
+        firstName: "Test",
+        lastName: "User",
+        email: "test@example.com",
+        confirmEmail: "test@example.com",
+        mobile: "+447712345678",
+        houseName: "123",
+        street: "Test Avenue",
+        city: "London",
+        county: "Greater London",
+        country: "United Kingdom",
+        postCode: "SW1A 1AA",
+        emFirstName: "Jane",
+        emLastName: "Doe",
+        emRelationship: "Spouse",
+        emDayPhone: "+447787654321",
+        emEveningPhone: "+447787654321",
+        emHouseName: "123",
+        emStreet: "Test Avenue",
+        emCity: "London",
+        emCounty: "Greater London",
+        emCountry: "United Kingdom",
+        emPostCode: "SW1A 1AA",
+        agreeTerms: true,
+        agreeInsurance: true,
+        captcha: true,
+      }
+    : {};
+
   const {
     register,
     handleSubmit,
@@ -113,6 +145,7 @@ export default function BookingForm({ tour }: BookingFormProps) {
       agreeTerms: false,
       agreeInsurance: false,
       captcha: false,
+      ...devDefaults,
     },
   });
 
@@ -187,6 +220,7 @@ export default function BookingForm({ tour }: BookingFormProps) {
         body: JSON.stringify({
           amount: tour.depositAmount,
           tourTitle: tour.title,
+          tourSlug: tour.slug,
           tourDate: tour.date,
           tourImage: tour.image,
           customerEmail: data.email,

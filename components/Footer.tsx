@@ -37,9 +37,12 @@ export default function Footer() {
           photos—we capture wild emotion, texture, and truth. Join us in telling
           nature&apos;s tale.
         </p>
-        <button className="bg-white text-black px-8 py-3 text-xs font-bold uppercase tracking-wider hover:bg-gray-200 transition-colors">
+        <Link
+          href="/tours"
+          className="bg-white text-black px-8 py-3 text-xs font-bold uppercase tracking-wider hover:bg-gray-200 transition-colors"
+        >
           View Expeditions
-        </button>
+        </Link>
       </div>
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-white/10 pt-12">

@@ -17,6 +17,8 @@ import {
   Camera,
 } from "lucide-react";
 
+import prisma from "@/lib/prisma";
+
 export async function generateStaticParams() {
   return tours.map((tour) => ({
     slug: tour.slug,
@@ -35,6 +37,14 @@ export default async function TourPage({
     notFound();
   }
 
+  // Fetch real-time availability from database
+  const dbTour = await prisma.tour.findUnique({
+    where: { slug: tour.slug },
+    select: { availableSlots: true },
+  });
+
+  const availableSlots = dbTour?.availableSlots ?? tour.maxPhotographers;
+
   return (
     <div className="min-h-screen bg-[#F4F4F0] text-[#1A1A1A]">
       <Navbar />
@@ -42,6 +52,7 @@ export default async function TourPage({
         tourName={tour.title}
         price={tour.price.split(" ")[0]}
         slug={tour.slug}
+        availableSlots={availableSlots}
       />
 
       {/* Hero Section */}
@@ -77,8 +88,13 @@ export default async function TourPage({
             <span className="text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2">
               <Calendar size={14} /> {tour.date}
             </span>
-            <span className="text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2">
-              <Users size={14} /> Max {tour.maxPhotographers} Guests
+            <span
+              className={`text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 ${availableSlots === 0 ? "text-red-400" : "text-white"}`}
+            >
+              <Users size={14} />{" "}
+              {availableSlots === 0
+                ? "Fully Booked"
+                : `${availableSlots} Slots Available`}
             </span>
           </div>
         </div>
@@ -173,7 +189,11 @@ export default async function TourPage({
                 </div>
               )}
 
-              <BookingActions tourName={tour.title} slug={tour.slug} />
+              <BookingActions
+                tourName={tour.title}
+                slug={tour.slug}
+                availableSlots={availableSlots}
+              />
 
               <div className="mb-8">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4 border-b pb-2">

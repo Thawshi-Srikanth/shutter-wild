@@ -6,7 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { tours } from "@/data/tours";
 
-export default function ExperienceScroll() {
+export default function ExperienceScroll({
+  availability,
+}: {
+  availability?: Record<string, number>;
+}) {
   const targetRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollRange, setScrollRange] = useState(0);
@@ -102,10 +106,20 @@ export default function ExperienceScroll() {
                   </div>
                   <div>
                     <span className="block text-xs text-white/50 uppercase tracking-wider mb-1">
-                      Limit
+                      Available
                     </span>
-                    <span className="text-sm font-medium">
-                      {tour.maxPhotographers} Guests
+                    <span
+                      className={`text-sm font-medium ${
+                        availability && availability[tour.slug] === 0
+                          ? "text-red-400"
+                          : ""
+                      }`}
+                    >
+                      {availability && availability[tour.slug] !== undefined
+                        ? availability[tour.slug] === 0
+                          ? "Fully Booked"
+                          : `${availability[tour.slug]} Slots`
+                        : `${tour.maxPhotographers} Slots`}
                     </span>
                   </div>
                 </div>

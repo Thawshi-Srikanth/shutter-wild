@@ -7,14 +7,29 @@ import Awards from "@/components/Awards";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import InstagramGrid from "@/components/InstagramGrid";
+import prisma from "@/lib/prisma";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch real-time availability for all tours
+  const dbTours = await prisma.tour.findMany({
+    select: {
+      slug: true,
+      availableSlots: true,
+    },
+  });
+
+  // Create a mapping of slug to available slots
+  const availability: Record<string, number> = {};
+  dbTours.forEach((t) => {
+    availability[t.slug] = t.availableSlots;
+  });
+
   return (
     <main className="min-h-screen bg-[#F4F4F0] selection:bg-[#2C3E2E] selection:text-white">
       <Navbar />
       <Hero />
       <div id="tours">
-        <Projects />
+        <Projects availability={availability} />
       </div>
       <Introduction />
       <Gallery />
