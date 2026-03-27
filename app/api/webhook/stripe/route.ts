@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
@@ -62,6 +63,11 @@ export async function POST(req: Request) {
       ]);
 
       console.log(`Successfully updated slots for tour: ${tour.title}`);
+
+      // Revalidate the tour page and the main tours list so the UI reflects the new slot count
+      revalidatePath(`/tours/${tour.slug}`);
+      revalidatePath("/tours");
+      revalidatePath("/");
     } catch (dbError) {
       console.error("Database update failed:", dbError);
       return NextResponse.json({ error: "Database error" }, { status: 500 });
