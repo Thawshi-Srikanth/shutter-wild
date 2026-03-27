@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import ToursListing from "./ToursListing";
 
+export const revalidate = 60; // Revalidate every 60 seconds for manual DB updates
+
 export default async function ToursPage() {
   // Fetch real-time availability for all tours
   const dbTours = await prisma.tour.findMany({

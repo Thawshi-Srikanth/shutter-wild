@@ -19,6 +19,8 @@ import {
 
 import prisma from "@/lib/prisma";
 
+export const revalidate = 60; // Revalidate every 60 seconds for manual DB updates
+
 export async function generateStaticParams() {
   return tours.map((tour) => ({
     slug: tour.slug,

@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 import InstagramGrid from "@/components/InstagramGrid";
 import prisma from "@/lib/prisma";
 
+export const revalidate = 60; // Revalidate every 60 seconds for manual DB updates
+
 export default async function Home() {
   // Fetch real-time availability for all tours
   const dbTours = await prisma.tour.findMany({
