@@ -158,10 +158,10 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <Mail size={14} />
               <Link
-                href="mailto:hello@shutterwild.com"
+                href="mailto:info@shutterwild.co.uk"
                 className="hover:text-white transition-colors"
               >
-                hello@shutterwild.com
+                info@shutterwild.co.uk
               </Link>
             </div>
           </div>

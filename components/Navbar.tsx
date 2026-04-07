@@ -147,7 +147,7 @@ export default function Navbar() {
                 <h4 className="font-bold text-white uppercase tracking-wider mb-4 text-xs">
                   Contact
                 </h4>
-                <p>hello@shutterwild.com</p>
+                <p>info@shutterwild.co.uk</p>
                 <p>+44 790 123 4567</p>
               </div>
               <div>

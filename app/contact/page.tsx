@@ -82,10 +82,10 @@ export default function ContactPage() {
                     For general inquiries and booking.
                   </p>
                   <Link
-                    href="mailto:hello@shutterwild.com"
+                    href="mailto:info@shutterwild.co.uk"
                     className="font-bold hover:Stext-gray-500 transition-colors"
                   >
-                    hello@shutterwild.com
+                    info@shutterwild.co.uk
                   </Link>
                 </div>
               </div>
