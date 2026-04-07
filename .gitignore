@@ -8,3 +8,5 @@ coverage/
 .temp
 
 /generated/prisma
+.vercel
+.env*.local
