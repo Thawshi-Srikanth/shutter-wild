@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLenis } from "lenis/react";
 
 interface PaginationProps {
   currentPage: number;
@@ -13,12 +14,23 @@ export default function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
+  const lenis = useLenis();
+
   if (totalPages <= 1) return null;
+
+  const handlePageChange = (page: number) => {
+    onPageChange(page);
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: false });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="flex justify-center items-center gap-2 mt-16 pb-8 border-t border-gray-200 pt-16">
       <button
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className="w-10 h-10 flex items-center justify-center border border-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#1A1A1A] transition-colors"
         aria-label="Previous page"
@@ -30,7 +42,7 @@ export default function Pagination({
         {Array.from({ length: totalPages }).map((_, i) => (
           <button
             key={i}
-            onClick={() => onPageChange(i + 1)}
+            onClick={() => handlePageChange(i + 1)}
             className={`w-10 h-10 flex items-center justify-center text-sm font-medium transition-colors border ${
               currentPage === i + 1
                 ? "bg-[#1A1A1A] text-white border-[#1A1A1A]"
@@ -43,7 +55,7 @@ export default function Pagination({
       </div>
 
       <button
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className="w-10 h-10 flex items-center justify-center border border-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#1A1A1A] transition-colors"
         aria-label="Next page"

@@ -126,6 +126,11 @@ export default function ExperienceScroll({
               </div>
             </Link>
           ))}
+          {/* Dummy spacer to ensure the last card is fully visible on wide screens */}
+          <div
+            className="hidden lg:block w-[30vw] flex-shrink-0"
+            aria-hidden="true"
+          />
         </motion.div>
       </div>
     </section>

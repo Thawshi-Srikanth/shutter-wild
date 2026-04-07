@@ -149,6 +149,14 @@ export default async function TourPage({
             <h2 className="font-serif text-3xl md:text-4xl mb-8">
               Equipment Profile
             </h2>
+            <div className="bg-white p-6 border-l-4 border-gray-300 shadow-sm mb-8">
+              <p className="text-gray-700 text-sm font-medium">
+                Please note: All camera gear, lenses, equipment, and appropriate
+                warm clothing are{" "}
+                <span className="font-bold">not included</span> in the
+                expedition and must be provided by the attendee.
+              </p>
+            </div>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
               {tour.equipment.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3 text-gray-700">
@@ -160,6 +168,38 @@ export default async function TourPage({
                 </li>
               ))}
             </ul>
+
+            {/* New section for Travel & Health Disclaimers */}
+            <h2 className="font-serif text-3xl md:text-4xl mb-8">
+              Important Disclaimers
+            </h2>
+            <div className="space-y-6 text-gray-600 mb-16 text-sm bg-gray-50/80 p-6 md:p-8 border-l-4 border-[#1A1A1A] shadow-sm">
+              <div>
+                <h4 className="font-bold text-[#1A1A1A] mb-2 uppercase tracking-wide text-xs">
+                  Medical Insurance & Vaccinations
+                </h4>
+                <p className="leading-relaxed">
+                  It is the attendee&apos;s sole responsibility to ensure they
+                  have all required and recommended travel vaccinations for the
+                  destination. Comprehensive medical and travel insurance is
+                  mandatory and is not provided by us. We will request proof of
+                  suitable coverage prior to departure.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#1A1A1A] mb-2 uppercase tracking-wide text-xs">
+                  Traveling with Photography Gear
+                </h4>
+                <p className="leading-relaxed">
+                  We highly recommend insuring your camera gear against loss,
+                  theft, or damage. For large lenses that exceed standard cabin
+                  baggage allowances, please check directly with your airline
+                  regarding their specific policies for professional photography
+                  equipment, as regulations vary significantly. It remains your
+                  responsibility to ensure your gear is safely transported.
+                </p>
+              </div>
+            </div>
 
             {tour.gallery && tour.gallery.length > 0 && (
               <LightboxGallery images={tour.gallery} tourTitle={tour.title} />

@@ -25,7 +25,7 @@ export default function AboutPage() {
               knowledge, and meaningful storytelling.
             </p>
             <p>
-              Led by award-recognised wildlife photographer Thinesh
+              Led by award-winning wildlife photographer Thinesh
               Thirugnanasampanthar, our expeditions are designed for
               photographers who want more than just sightings — they want
               understanding, positioning, behaviour, light, and decisive
