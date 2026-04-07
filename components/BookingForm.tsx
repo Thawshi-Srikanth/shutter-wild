@@ -260,6 +260,7 @@ export default function BookingForm({ tour }: BookingFormProps) {
           tourImage: tour.image,
           customerEmail: data.email,
           captchaToken: data.captcha,
+          formData: data,
         }),
       });
 
