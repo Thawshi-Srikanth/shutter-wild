@@ -40,15 +40,43 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
     setAgreedToTerms(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!agreedToTerms) {
       alert("Please agree to the terms and conditions.");
       return;
     }
-    console.log(`Booking submitted for ${tourName}`);
-    setIsOpen(false);
-    alert("Thank you for your booking request! We will be in touch shortly.");
+
+    setIsSubmitting(true);
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      tourName,
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/enquire", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        setIsOpen(false);
+        setAgreedToTerms(false);
+      } else {
+        alert("Failed to send enquiry. Please try again.");
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -106,9 +134,9 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
 
               {/* Form Section */}
               <div className="w-full lg:w-3/5 p-8 md:p-12 overflow-y-auto max-h-[90vh]">
-                <h3 className="font-serif text-3xl mb-2">Book Your Place</h3>
+                <h3 className="font-serif text-3xl mb-2">Send an Enquiry</h3>
                 <p className="text-gray-500 mb-8 text-sm">
-                  Secure your spot for:{" "}
+                  Enquiring about:{" "}
                   <span className="font-semibold text-black">{tourName}</span>
                 </p>
 
@@ -123,6 +151,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
                       </label>
                       <input
                         type="text"
+                        name="firstName"
                         id="firstName"
                         required
                         className="border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors"
@@ -137,6 +166,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
                       </label>
                       <input
                         type="text"
+                        name="lastName"
                         id="lastName"
                         required
                         className="border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors"
@@ -153,6 +183,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       id="email"
                       required
                       className="border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors"
@@ -168,6 +199,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
                       id="phone"
                       required
                       className="border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors"
@@ -182,6 +214,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
                       Additional Needs (Optional)
                     </label>
                     <textarea
+                      name="message"
                       id="message"
                       rows={3}
                       className="border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors resize-none"
@@ -227,14 +260,14 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
 
                   <button
                     type="submit"
-                    disabled={!agreedToTerms}
+                    disabled={!agreedToTerms || isSubmitting}
                     className={`mt-4 px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors ${
-                      agreedToTerms
+                      agreedToTerms && !isSubmitting
                         ? "bg-black text-white hover:bg-gray-800"
                         : "bg-gray-200 text-gray-400 cursor-not-allowed"
                     }`}
                   >
-                    Confirm Booking Request
+                    {isSubmitting ? "Sending..." : "Submit Enquiry"}
                   </button>
                 </form>
               </div>

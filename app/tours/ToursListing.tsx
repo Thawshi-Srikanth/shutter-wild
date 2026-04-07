@@ -9,6 +9,7 @@ import ToursFilter from "@/components/ToursFilter";
 import Pagination from "@/components/Pagination";
 import { tours } from "@/data/tours";
 import { ArrowRight, Calendar, Users, MapPin } from "lucide-react";
+import { useBookingModal } from "@/components/BookingModalProvider";
 
 const TOURS_PER_PAGE = 6;
 
@@ -17,6 +18,7 @@ export default function ToursListing({
 }: {
   availability: Record<string, number>;
 }) {
+  const { openModal } = useBookingModal();
   const [activeYear, setActiveYear] = useState<string>("All");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -267,16 +269,24 @@ export default function ToursListing({
                       </div>
                     </div>
 
-                    <Link
-                      href={`/tours/${tour.slug}`}
-                      className="inline-flex items-center gap-2 border border-black border-opacity-20 px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 w-fit group"
-                    >
-                      Explore Expedition
-                      <ArrowRight
-                        size={16}
-                        className="transform group-hover:translate-x-1 transition-transform"
-                      />
-                    </Link>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Link
+                        href={`/tours/${tour.slug}`}
+                        className="inline-flex items-center justify-center gap-2 border border-black border-opacity-20 px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 w-full sm:w-fit group"
+                      >
+                        Explore Expedition
+                        <ArrowRight
+                          size={16}
+                          className="transform group-hover:translate-x-1 transition-transform"
+                        />
+                      </Link>
+                      <button
+                        onClick={() => openModal(tour.title)}
+                        className="inline-flex items-center justify-center gap-2 border border-black px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-all duration-300 w-full sm:w-fit"
+                      >
+                        Enquire Now
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

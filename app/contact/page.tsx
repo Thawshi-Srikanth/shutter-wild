@@ -1,16 +1,49 @@
+"use client";
+
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, CheckCircle2 } from "lucide-react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Contact Us | ShutterWild",
-  description:
-    "Get in touch with ShutterWild for expedition inquiries, custom private tours, and wildlife photography questions.",
-};
-
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        alert("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F4F4F0] text-[#1A1A1A]">
       <Navbar />
@@ -122,103 +155,145 @@ export default function ContactPage() {
 
           {/* Form */}
           <div className="bg-white p-8 md:p-12 shadow-sm rounded-sm">
-            <h2 className="font-serif text-3xl mb-8">Send a Message</h2>
-            <form className="flex flex-col gap-6" action="#">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="font-serif text-3xl mb-8 font-medium">
+              Send a Message
+            </h2>
+            {isSuccess ? (
+              <div className="py-12 flex flex-col items-center text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="bg-[#2C3E2E]/10 p-4 rounded-full mb-6">
+                  <CheckCircle2 className="w-12 h-12 text-[#2C3E2E]" />
+                </div>
+                <h3 className="font-serif text-3xl mb-4">Message Sent</h3>
+                <p className="text-gray-600 max-w-sm mb-8">
+                  Your message is received. Thank you for contacting us! We will
+                  get back to you as soon as possible.
+                </p>
+                <button
+                  onClick={() => setIsSuccess(false)}
+                  className="text-xs font-bold uppercase tracking-widest border-b border-black pb-1 hover:text-gray-500 transition-colors"
+                >
+                  Send another message
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label
+                      htmlFor="firstName"
+                      className="text-xs font-bold uppercase tracking-wider text-gray-500"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label
+                      htmlFor="lastName"
+                      className="text-xs font-bold uppercase tracking-wider text-gray-500"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label
+                      htmlFor="email"
+                      className="text-xs font-bold uppercase tracking-wider text-gray-500"
+                    >
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label
+                      htmlFor="phone"
+                      className="text-xs font-bold uppercase tracking-wider text-gray-500"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors"
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div className="flex flex-col gap-2">
                   <label
-                    htmlFor="firstName"
+                    htmlFor="subject"
                     className="text-xs font-bold uppercase tracking-wider text-gray-500"
                   >
-                    First Name
+                    Subject
                   </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors"
+                  <select
+                    id="subject"
+                    name="subject"
+                    className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors appearance-none"
                     required
-                  />
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select an option
+                    </option>
+                    <option value="expedition">Expedition Inquiry</option>
+                    <option value="private">Private Custom Tour</option>
+                    <option value="press">Press & Media</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <label
-                    htmlFor="lastName"
+                    htmlFor="message"
                     className="text-xs font-bold uppercase tracking-wider text-gray-500"
                   >
-                    Last Name
+                    Your Message
                   </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors"
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors resize-none"
                     required
-                  />
+                  ></textarea>
                 </div>
-              </div>
 
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="email"
-                  className="text-xs font-bold uppercase tracking-wider text-gray-500"
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`mt-4 bg-[#2C3E2E] text-white px-8 py-4 text-xs font-bold uppercase tracking-wider hover:bg-[#1A261C] transition-colors self-start flex items-center gap-3 ${
+                    isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
                 >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors"
-                  required
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="subject"
-                  className="text-xs font-bold uppercase tracking-wider text-gray-500"
-                >
-                  Subject
-                </label>
-                <select
-                  id="subject"
-                  name="subject"
-                  className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors appearance-none"
-                  required
-                >
-                  <option value="" disabled selected>
-                    Select an option
-                  </option>
-                  <option value="expedition">Expedition Inquiry</option>
-                  <option value="private">Private Custom Tour</option>
-                  <option value="press">Press & Media</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="message"
-                  className="text-xs font-bold uppercase tracking-wider text-gray-500"
-                >
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  className="w-full bg-transparent border-b border-black/20 py-2 focus:outline-none focus:border-black transition-colors resize-none"
-                  required
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="mt-4 bg-[#2C3E2E] text-white px-8 py-4 text-xs font-bold uppercase tracking-wider hover:bg-[#1A261C] transition-colors self-start"
-              >
-                Send Message
-              </button>
-            </form>
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
