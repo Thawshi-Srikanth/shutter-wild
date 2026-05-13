@@ -26,8 +26,29 @@ export default async function Home() {
     availability[t.slug] = t.availableSlots;
   });
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Shutter Wild Expeditions",
+    url: "https://shutter-wild.com",
+    logo: "https://shutter-wild.com/apple-touch-icon.png",
+    sameAs: [
+      "https://www.facebook.com/thinesht",
+      "https://www.instagram.com/thineshtphotography",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+44-7557-763222",
+      contactType: "customer service",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[#F4F4F0] selection:bg-[#2C3E2E] selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <Hero />
       <div id="tours">

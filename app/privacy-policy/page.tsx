@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: "Privacy Policy | Shutter Wild - Expeditions",
-  description: "Privacy Policy for Shutter Wild Expeditions LTD.",
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Information on how ShutterWild Expeditions collects, uses, and protects your personal data.",
 };
 
 export default function PrivacyPolicyPage() {

@@ -1,5 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about ShutterWild Expeditions, our mission for ethical wildlife photography, and our commitment to professional fieldcraft guidance.",
+};
 
 export default function AboutPage() {
   return (

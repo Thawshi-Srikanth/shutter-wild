@@ -1,6 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQComponent from "@/components/FAQ";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Frequently Asked Questions",
+  description:
+    "Common questions about our wildlife photography expeditions, booking process, equipment requirements, and travel logistics.",
+};
 
 export default function FAQPage() {
   return (

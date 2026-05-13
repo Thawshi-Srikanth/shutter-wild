@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: "Cookie Policy | Shutter Wild - Expeditions",
-  description: "Cookie Policy for Shutter Wild Expeditions LTD.",
+export const metadata: Metadata = {
+  title: "Cookie Policy",
+  description:
+    "Learn about how we use cookies on our website to improve your browsing experience.",
 };
 
 export default function CookiePolicyPage() {

@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: "Terms & Conditions | Shutter Wild - Expeditions",
-  description: "Terms & Conditions for ShutterWild Expeditions LTD.",
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description:
+    "Terms and conditions for booking and participating in ShutterWild Expeditions wildlife photography tours.",
 };
 
 export default function TermsOfServicePage() {

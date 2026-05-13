@@ -16,6 +16,39 @@ import {
   XCircle,
   Camera,
 } from "lucide-react";
+import { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { slug } = await params;
+  const tour = tours.find((t) => t.slug === slug);
+
+  if (!tour) return {};
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: tour.title,
+    description: tour.overview.substring(0, 160) + "...",
+    openGraph: {
+      title: tour.title,
+      description: tour.overview,
+      images: [tour.image, ...previousImages],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: tour.title,
+      description: tour.overview.substring(0, 160) + "...",
+      images: [tour.image],
+    },
+  };
+}
 
 import prisma from "@/lib/prisma";
 

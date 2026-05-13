@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
     const adminEmail = process.env.ADMIN_EMAIL;
     const fromEmail =
-      process.env.EMAIL_FROM || "Shutter Wild <noreply@shutter-wild.com>";
+      process.env.EMAIL_FROM || "Shutter Wild <noreply@shutterwild.co.uk>";
 
     const emailPromises = [];
 
