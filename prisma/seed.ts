@@ -1,7 +1,8 @@
 import { PrismaClient } from "../app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { tours } from "../data/tours";
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
@@ -19,6 +20,19 @@ async function main() {
       update: {
         title: tour.title,
         maxPhotographers: tour.maxPhotographers,
+        date: tour.date,
+        location: tour.location,
+        price: tour.price,
+        duration: tour.duration,
+        overview: tour.overview,
+        focusSpecies: tour.focusSpecies,
+        itinerary: tour.itinerary as any,
+        included: tour.included,
+        notIncluded: tour.notIncluded,
+        equipment: tour.equipment,
+        image: tour.image,
+        gallery: tour.gallery || [],
+        nonRefundableDeposit: tour.nonRefundableDeposit,
       },
       create: {
         id: tour.id,
@@ -26,6 +40,19 @@ async function main() {
         title: tour.title,
         maxPhotographers: tour.maxPhotographers,
         availableSlots: tour.maxPhotographers,
+        date: tour.date,
+        location: tour.location,
+        price: tour.price,
+        duration: tour.duration,
+        overview: tour.overview,
+        focusSpecies: tour.focusSpecies,
+        itinerary: tour.itinerary as any,
+        included: tour.included,
+        notIncluded: tour.notIncluded,
+        equipment: tour.equipment,
+        image: tour.image,
+        gallery: tour.gallery || [],
+        nonRefundableDeposit: tour.nonRefundableDeposit,
       },
     });
   }
@@ -40,3 +67,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+

@@ -8,23 +8,48 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import InstagramGrid from "@/components/InstagramGrid";
 import prisma from "@/lib/prisma";
+import { tours as staticTours } from "@/data/tours";
 
 export const revalidate = 60; // Revalidate every 60 seconds for manual DB updates
 
 export default async function Home() {
-  // Fetch real-time availability for all tours
-  const dbTours = await prisma.tour.findMany({
-    select: {
-      slug: true,
-      availableSlots: true,
-    },
-  });
+  let dbTours: any[] = [];
+  try {
+    dbTours = await prisma.tour.findMany();
+  } catch (err) {
+    console.error("Database query failed, falling back to static files:", err);
+  }
+
+  // Fallback to static files if Postgres has not seeded yet
+  const toursList = dbTours && dbTours.length > 0
+    ? dbTours.map((t) => ({
+        id: t.id,
+        slug: t.slug,
+        title: t.title,
+        maxPhotographers: t.maxPhotographers,
+        availableSlots: t.availableSlots,
+        date: t.date,
+        location: t.location,
+        price: t.price,
+        duration: t.duration,
+        overview: t.overview,
+        focusSpecies: t.focusSpecies,
+        itinerary: (t.itinerary as any) || [],
+        included: t.included,
+        notIncluded: t.notIncluded,
+        equipment: t.equipment,
+        image: t.image,
+        gallery: t.gallery,
+        nonRefundableDeposit: t.nonRefundableDeposit,
+      }))
+    : staticTours;
 
   // Create a mapping of slug to available slots
   const availability: Record<string, number> = {};
-  dbTours.forEach((t) => {
+  toursList.forEach((t) => {
     availability[t.slug] = t.availableSlots;
   });
+
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -52,7 +77,7 @@ export default async function Home() {
       <Navbar />
       <Hero />
       <div id="tours">
-        <Projects availability={availability} />
+        <Projects toursList={toursList} availability={availability} />
       </div>
       <Introduction />
       <Gallery />

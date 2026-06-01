@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import BookingActions from "@/components/BookingActions";
 import MobileStickyBooking from "@/components/MobileStickyBooking";
 import LightboxGallery from "@/components/LightboxGallery";
-import { tours } from "@/data/tours";
+import { tours as staticTours } from "@/data/tours";
 import {
   ArrowLeft,
   Calendar,
@@ -17,6 +17,7 @@ import {
   Camera,
 } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
+import prisma from "@/lib/prisma";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -27,7 +28,17 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
-  const tour = tours.find((t) => t.slug === slug);
+  
+  let tour: any = null;
+  try {
+    tour = await prisma.tour.findUnique({
+      where: { slug },
+    });
+  } catch (err) {}
+
+  if (!tour) {
+    tour = staticTours.find((t) => t.slug === slug);
+  }
 
   if (!tour) return {};
 
@@ -50,12 +61,17 @@ export async function generateMetadata(
   };
 }
 
-import prisma from "@/lib/prisma";
-
 export const revalidate = 60; // Revalidate every 60 seconds for manual DB updates
 
 export async function generateStaticParams() {
-  return tours.map((tour) => ({
+  let dbTours: any[] = [];
+  try {
+    dbTours = await prisma.tour.findMany({ select: { slug: true } });
+  } catch (err) {}
+
+  const allTours = dbTours.length > 0 ? dbTours : staticTours;
+
+  return allTours.map((tour) => ({
     slug: tour.slug,
   }));
 }
@@ -66,19 +82,59 @@ export default async function TourPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const tour = tours.find((t) => t.slug === slug);
+  
+  let tour: any = null;
+  let availableSlots = 0;
 
-  if (!tour) {
-    notFound();
+  try {
+    const dbTour = await prisma.tour.findUnique({
+      where: { slug },
+    });
+    if (dbTour) {
+      tour = {
+        id: dbTour.id,
+        slug: dbTour.slug,
+        title: dbTour.title,
+        maxPhotographers: dbTour.maxPhotographers,
+        date: dbTour.date,
+        location: dbTour.location,
+        price: dbTour.price,
+        duration: dbTour.duration,
+        overview: dbTour.overview,
+        focusSpecies: dbTour.focusSpecies,
+        itinerary: (dbTour.itinerary as any) || [],
+        included: dbTour.included,
+        notIncluded: dbTour.notIncluded,
+        equipment: dbTour.equipment,
+        image: dbTour.image,
+        gallery: dbTour.gallery,
+        nonRefundableDeposit: dbTour.nonRefundableDeposit,
+      };
+      availableSlots = dbTour.availableSlots;
+    }
+  } catch (err) {
+    console.error("Database query failed:", err);
   }
 
-  // Fetch real-time availability from database
-  const dbTour = await prisma.tour.findUnique({
-    where: { slug: tour.slug },
-    select: { availableSlots: true },
-  });
+  // Fallback to static data
+  if (!tour) {
+    const staticTour = staticTours.find((t) => t.slug === slug);
+    if (!staticTour) {
+      notFound();
+    }
+    tour = staticTour;
 
-  const availableSlots = dbTour?.availableSlots ?? tour.maxPhotographers;
+    try {
+      const dbTourAvail = await prisma.tour.findUnique({
+        where: { slug },
+        select: { availableSlots: true },
+      });
+      availableSlots = dbTourAvail?.availableSlots ?? tour.maxPhotographers;
+    } catch (err) {
+      availableSlots = tour.maxPhotographers;
+    }
+  }
+
 
   return (
     <div className="min-h-screen bg-[#F4F4F0] text-[#1A1A1A]">

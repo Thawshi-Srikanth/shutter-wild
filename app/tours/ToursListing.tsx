@@ -7,15 +7,17 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ToursFilter from "@/components/ToursFilter";
 import Pagination from "@/components/Pagination";
-import { tours } from "@/data/tours";
+import { Tour } from "@/data/tours";
 import { ArrowRight, Calendar, Users, MapPin } from "lucide-react";
 import { useBookingModal } from "@/components/BookingModalProvider";
 
 const TOURS_PER_PAGE = 6;
 
 export default function ToursListing({
+  initialTours,
   availability,
 }: {
+  initialTours: Tour[];
   availability: Record<string, number>;
 }) {
   const { openModal } = useBookingModal();
@@ -29,7 +31,7 @@ export default function ToursListing({
   // Extract unique years from tour dates
   const availableYears = useMemo(() => {
     const years = new Set<string>();
-    tours.forEach((tour) => {
+    initialTours.forEach((tour) => {
       // Basic regex to find a 4-digit year in the date string
       const yearMatch = tour.date.match(/\b(20\d{2})\b/);
       if (yearMatch) {
@@ -37,11 +39,11 @@ export default function ToursListing({
       }
     });
     return Array.from(years).sort(); // Sort ascending
-  }, []);
+  }, [initialTours]);
 
   // Filter and sort tours
   const filteredTours = useMemo(() => {
-    let result = tours;
+    let result = initialTours;
 
     // 1. Filter by Year
     if (activeYear !== "All") {
