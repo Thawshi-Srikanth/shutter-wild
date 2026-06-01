@@ -88,7 +88,7 @@ export default function ToursListing({
     }
 
     return result;
-  }, [activeYear, searchQuery, maxGroupSize, priceSort]);
+  }, [initialTours, activeYear, searchQuery, maxGroupSize, priceSort]);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredTours.length / TOURS_PER_PAGE);

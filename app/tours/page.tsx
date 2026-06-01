@@ -46,7 +46,7 @@ export default async function ToursPage() {
   // Create a mapping of slug to available slots
   const availability: Record<string, number> = {};
   toursList.forEach((t) => {
-    availability[t.slug] = t.availableSlots;
+    availability[t.slug] = t.availableSlots ?? t.maxPhotographers;
   });
 
   return <ToursListing initialTours={toursList} availability={availability} />;

@@ -122,7 +122,7 @@ export async function upsertTour(data: TourInput) {
     return { success: true };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return { success: false, error: error.errors[0]?.message || "Validation failed." };
+      return { success: false, error: error.issues[0]?.message || "Validation failed." };
     }
     console.error("Failed to upsert tour:", error);
     return { success: false, error: "Failed to save tour details in database." };

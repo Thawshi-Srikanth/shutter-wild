@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import BookingActions from "@/components/BookingActions";
 import MobileStickyBooking from "@/components/MobileStickyBooking";
 import LightboxGallery from "@/components/LightboxGallery";
-import { tours as staticTours } from "@/data/tours";
+import { tours as staticTours, Tour } from "@/data/tours";
 import {
   ArrowLeft,
   Calendar,
@@ -83,7 +83,7 @@ export default async function TourPage({
 }) {
   const { slug } = await params;
   
-  let tour: any = null;
+  let tour: Tour | null = null;
   let availableSlots = 0;
 
   try {

@@ -52,6 +52,13 @@ export default async function AdminDashboardLayout({
             <Compass size={16} className="text-[#1E2E22]" />
             Expeditions
           </Link>
+          <Link
+            href="/admin/bookings"
+            className="flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-widest rounded-sm text-gray-500 hover:text-[#1A1A1A] hover:bg-[#F4F4F0] transition-all"
+          >
+            <Calendar size={16} className="text-[#1E2E22]" />
+            Bookings
+          </Link>
         </nav>
 
         {/* Footer Area */}

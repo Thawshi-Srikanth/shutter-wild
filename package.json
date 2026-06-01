@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "clean": "next clean",
+    "typecheck": "tsc --noEmit",
     "media:migrate": "tsx scripts/upload-images.ts"
   },
   "dependencies": {
