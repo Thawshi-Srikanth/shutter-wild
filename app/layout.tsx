@@ -7,6 +7,7 @@ import { BookingModalProvider } from "@/components/BookingModalProvider";
 import { NewsletterModalProvider } from "@/components/NewsletterModalProvider";
 import ImageProtector from "@/components/ImageProtector";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Script from "next/script";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -93,6 +94,31 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${manrope.variable}`}>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-BTKE2X573K"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            
+            var consent = localStorage.getItem('cookie_consent');
+            var isAccepted = consent === 'accepted';
+            
+            gtag('consent', 'default', {
+              'ad_storage': isAccepted ? 'granted' : 'denied',
+              'ad_user_data': isAccepted ? 'granted' : 'denied',
+              'ad_personalization': isAccepted ? 'granted' : 'denied',
+              'analytics_storage': isAccepted ? 'granted' : 'denied'
+            });
+
+            gtag('js', new Date());
+            gtag('config', 'G-BTKE2X573K');
+          `}
+        </Script>
+      </head>
       <body
         className="font-sans antialiased bg-[#F4F4F0] text-[#1A1A1A]"
         suppressHydrationWarning
