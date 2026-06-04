@@ -11,7 +11,7 @@ import { tours } from "@/data/tours";
 import { ArrowRight, Calendar, Users, MapPin } from "lucide-react";
 import { useBookingModal } from "@/components/BookingModalProvider";
 
-const TOURS_PER_PAGE = 6;
+const TOURS_PER_PAGE = 10;
 
 export default function ToursListing({
   availability,
@@ -72,7 +72,7 @@ export default function ToursListing({
       });
     }
 
-    // 4. Sort by Price
+    // 4. Sort by Price or default by Year
     if (priceSort) {
       result = [...result].sort((a, b) => {
         // Parse prices, assuming format like "£1,750 per person"
@@ -82,6 +82,15 @@ export default function ToursListing({
         if (priceSort === "low-to-high") return priceA - priceB;
         if (priceSort === "high-to-low") return priceB - priceA;
         return 0;
+      });
+    } else {
+      // Default: Sort by Year ascending
+      result = [...result].sort((a, b) => {
+        const yearA = a.date.match(/\b(20\d{2})\b/)?.[1];
+        const yearB = b.date.match(/\b(20\d{2})\b/)?.[1];
+        const valA = yearA ? parseInt(yearA, 10) : Infinity;
+        const valB = yearB ? parseInt(yearB, 10) : Infinity;
+        return valA - valB;
       });
     }
 
