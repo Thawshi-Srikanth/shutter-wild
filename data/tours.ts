@@ -205,6 +205,108 @@ export const tours: Tour[] = [
     ],
   },
   {
+    id: "india-tiger-umred-tadoba-2026",
+    title: "India Tiger Photography Tour – Umred & Tadoba",
+    slug: "india-tiger-umred-tadoba",
+    date: "31 October – 7 November 2026",
+    location: "Maharashtra, India",
+    maxPhotographers: 7,
+    price: "£2,850 per person",
+    duration: "8 Days | 7 Nights",
+    overview:
+      "Join ShutterWild Expedition for an immersive tiger photography adventure through two of Maharashtra’s exciting wildlife destinations — Umred Karhandla Wildlife Sanctuary and Tadoba-Andhari Tiger Reserve.\n\nDesigned specifically with wildlife photographers in mind, this small-group tour combines multiple morning and afternoon safari sessions, giving us repeated opportunities to photograph Bengal tigers as well as the rich variety of wildlife found across this region of central India.",
+    focusSpecies: [
+      "Bengal Tiger",
+      "Leopard",
+      "Sloth Bear",
+      "Wild Dog (Dhole)",
+      "Gaur",
+      "Sambar",
+      "Spotted Deer",
+      "Wild Boar",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "31 October | Arrival in Nagpur & Transfer to Umred",
+        description:
+          "Arrival at Nagpur Airport and road transfer to Umred Karhandla landscape. Settle in, prepare camera equipment, and participate in a comprehensive tour briefing covering safari procedures, vehicle photography, expected wildlife behaviour, and plans for the coming days.",
+      },
+      {
+        day: "Day 2",
+        title: "1 November | Umred – Morning & Afternoon Safaris",
+        description:
+          "Early morning safari searching for Bengal tigers, leopards, sloth bears, wild dogs, gaur, sambar, spotted deer, wild boar, and birdlife. Return for breakfast/brunch, rest, and image management before returning to the reserve for an afternoon safari until closing time.",
+      },
+      {
+        day: "Day 3",
+        title: "2 November | Umred – Morning & Afternoon Safaris",
+        description:
+          "Full day dedicated to wildlife photography at Umred. Morning safari begins around sunrise tracking fresh pugmarks and alarm calls, followed by midday rest and an afternoon safari concentrating on wildlife encounters in soft evening light.",
+      },
+      {
+        day: "Day 4",
+        title: "3 November | Final Umred Safaris",
+        description:
+          "Final two safaris in Umred Karhandla (completing 3 morning and 3 afternoon drives). Search for tigers and other key species before returning to prepare for transfer to Tadoba.",
+      },
+      {
+        day: "Day 5",
+        title: "4 November | Transfer from Umred to Tadoba & First Tadoba Safari",
+        description:
+          "After breakfast, leave Umred and travel by road towards the legendary Tadoba-Andhari Tiger Reserve, one of India's best-known tiger reserves. Afternoon safari exploration upon arrival.",
+      },
+      {
+        day: "Days 6-7",
+        title: "5–6 November | Tadoba-Andhari Tiger Reserve Safaris",
+        description:
+          "Full days of morning and afternoon safaris in Tadoba-Andhari Tiger Reserve, focusing on tiger encounters, sloth bears, leopards, and rich forest biodiversity.",
+      },
+      {
+        day: "Day 8",
+        title: "7 November | Final Morning Safari & Departure",
+        description:
+          "Final morning safari in Tadoba followed by breakfast, check-out, and transfer back to Nagpur Airport for onward flights.",
+      },
+    ],
+    included: [
+      "7 nights accommodation",
+      "Full Board meals throughout",
+      "Multiple morning and afternoon safaris across Umred & Tadoba",
+      "All national park entrance fees and safari permits",
+      "Road transfers between Nagpur Airport, Umred, and Tadoba",
+      "Photographer-led guidance and driver consistency",
+    ],
+    notIncluded: [
+      "International & domestic flights to/from Nagpur",
+      "Travel & medical insurance (mandatory)",
+      "Personal equipment & camera charges (if applicable)",
+      "Alcoholic beverages & personal expenses",
+      "Gratuities & tips for guides and drivers",
+    ],
+    equipment: [
+      "300–600mm telephoto lens",
+      "Fast autofocus camera body (secondary body recommended)",
+      "Bean bag or monopod for safari vehicle support",
+      "Dust protection for camera equipment",
+      "Lightweight, neutral-colored clothing",
+    ],
+    nonRefundableDeposit: 600,
+    image: "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-1.webp",
+    gallery: [
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-1.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-2.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-3.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-4.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-5.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-6.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-7.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-8.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-9.webp",
+      "/captures/India Tiger Umred Tadoba/bengal-tiger-umred-tadoba-10.webp",
+    ],
+  },
+  {
     id: "sri-lanka-leopard-2027",
     title: "Sri Lanka Leopard Intensive",
     slug: "sri-lanka-leopard",
