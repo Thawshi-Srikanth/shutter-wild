@@ -126,6 +126,19 @@ exports.Prisma.TourScalarFieldEnum = {
   title: 'title',
   maxPhotographers: 'maxPhotographers',
   availableSlots: 'availableSlots',
+  date: 'date',
+  location: 'location',
+  price: 'price',
+  duration: 'duration',
+  overview: 'overview',
+  focusSpecies: 'focusSpecies',
+  itinerary: 'itinerary',
+  included: 'included',
+  notIncluded: 'notIncluded',
+  equipment: 'equipment',
+  image: 'image',
+  gallery: 'gallery',
+  nonRefundableDeposit: 'nonRefundableDeposit',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -144,9 +157,19 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 

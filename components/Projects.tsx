@@ -4,11 +4,13 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { tours } from "@/data/tours";
+import { Tour } from "@/data/tours";
 
 export default function ExperienceScroll({
+  toursList,
   availability,
 }: {
+  toursList: Tour[];
   availability?: Record<string, number>;
 }) {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -65,7 +67,7 @@ export default function ExperienceScroll({
           // Updated for mobile: horizontal swipe with snapping
           className="flex flex-row w-full lg:w-max items-center lg:items-center px-6 md:px-12 lg:pl-24 gap-6 md:gap-12 lg:gap-12 lg:pr-[10vw] lg:mt-48 overflow-x-auto lg:overflow-visible snap-x snap-mandatory scrollbar-hide"
         >
-          {tours.map((tour) => (
+          {toursList.map((tour) => (
             <Link
               href={`/tours/${tour.slug}`}
               key={tour.id}

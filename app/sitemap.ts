@@ -1,8 +1,23 @@
 import { MetadataRoute } from "next";
-import { tours } from "@/data/tours";
+import { tours as staticTours } from "@/data/tours";
+import prisma from "@/lib/prisma";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://shutterwild.co.uk";
+
+  // Fetch slugs from Postgres
+  let dbTours: any[] = [];
+  try {
+    dbTours = (await prisma.tour.findMany({
+      select: {
+        slug: true,
+      },
+    })) as any[];
+  } catch (err) {
+    console.error("Sitemap query failed, falling back to static:", err);
+  }
+
+  const toursList = dbTours && dbTours.length > 0 ? dbTours : staticTours;
 
   // Static routes
   const routes = [
@@ -23,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Dynamic tour routes
-  const tourRoutes = tours.map((tour) => ({
+  const tourRoutes = toursList.map((tour) => ({
     url: `${baseUrl}/tours/${tour.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,

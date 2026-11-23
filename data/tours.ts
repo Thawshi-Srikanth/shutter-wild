@@ -16,6 +16,7 @@ export type Tour = {
   image: string;
   gallery?: string[];
   nonRefundableDeposit: number;
+  availableSlots?: number;
 };
 
 export const tours: Tour[] = [

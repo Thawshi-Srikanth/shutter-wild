@@ -11,14 +11,27 @@ datasource db {
 }
 
 model Tour {
-  id               String    @id
-  slug             String    @unique
-  title            String
-  maxPhotographers Int
-  availableSlots   Int
-  bookings         Booking[]
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  id                   String    @id
+  slug                 String    @unique
+  title                String
+  maxPhotographers     Int
+  availableSlots       Int
+  date                 String
+  location             String
+  price                String
+  duration             String
+  overview             String
+  focusSpecies         String[]
+  itinerary            Json // Array of: { day: string, title: string, description: string }
+  included             String[]
+  notIncluded          String[]
+  equipment            String[]
+  image                String
+  gallery              String[]
+  nonRefundableDeposit Int
+  bookings             Booking[]
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 }
 
 model Booking {

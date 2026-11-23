@@ -1002,11 +1002,13 @@ export namespace Prisma {
   export type TourAvgAggregateOutputType = {
     maxPhotographers: number | null
     availableSlots: number | null
+    nonRefundableDeposit: number | null
   }
 
   export type TourSumAggregateOutputType = {
     maxPhotographers: number | null
     availableSlots: number | null
+    nonRefundableDeposit: number | null
   }
 
   export type TourMinAggregateOutputType = {
@@ -1015,6 +1017,13 @@ export namespace Prisma {
     title: string | null
     maxPhotographers: number | null
     availableSlots: number | null
+    date: string | null
+    location: string | null
+    price: string | null
+    duration: string | null
+    overview: string | null
+    image: string | null
+    nonRefundableDeposit: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1025,6 +1034,13 @@ export namespace Prisma {
     title: string | null
     maxPhotographers: number | null
     availableSlots: number | null
+    date: string | null
+    location: string | null
+    price: string | null
+    duration: string | null
+    overview: string | null
+    image: string | null
+    nonRefundableDeposit: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1035,6 +1051,19 @@ export namespace Prisma {
     title: number
     maxPhotographers: number
     availableSlots: number
+    date: number
+    location: number
+    price: number
+    duration: number
+    overview: number
+    focusSpecies: number
+    itinerary: number
+    included: number
+    notIncluded: number
+    equipment: number
+    image: number
+    gallery: number
+    nonRefundableDeposit: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1044,11 +1073,13 @@ export namespace Prisma {
   export type TourAvgAggregateInputType = {
     maxPhotographers?: true
     availableSlots?: true
+    nonRefundableDeposit?: true
   }
 
   export type TourSumAggregateInputType = {
     maxPhotographers?: true
     availableSlots?: true
+    nonRefundableDeposit?: true
   }
 
   export type TourMinAggregateInputType = {
@@ -1057,6 +1088,13 @@ export namespace Prisma {
     title?: true
     maxPhotographers?: true
     availableSlots?: true
+    date?: true
+    location?: true
+    price?: true
+    duration?: true
+    overview?: true
+    image?: true
+    nonRefundableDeposit?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1067,6 +1105,13 @@ export namespace Prisma {
     title?: true
     maxPhotographers?: true
     availableSlots?: true
+    date?: true
+    location?: true
+    price?: true
+    duration?: true
+    overview?: true
+    image?: true
+    nonRefundableDeposit?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1077,6 +1122,19 @@ export namespace Prisma {
     title?: true
     maxPhotographers?: true
     availableSlots?: true
+    date?: true
+    location?: true
+    price?: true
+    duration?: true
+    overview?: true
+    focusSpecies?: true
+    itinerary?: true
+    included?: true
+    notIncluded?: true
+    equipment?: true
+    image?: true
+    gallery?: true
+    nonRefundableDeposit?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1174,6 +1232,19 @@ export namespace Prisma {
     title: string
     maxPhotographers: number
     availableSlots: number
+    date: string
+    location: string
+    price: string
+    duration: string
+    overview: string
+    focusSpecies: string[]
+    itinerary: JsonValue
+    included: string[]
+    notIncluded: string[]
+    equipment: string[]
+    image: string
+    gallery: string[]
+    nonRefundableDeposit: number
     createdAt: Date
     updatedAt: Date
     _count: TourCountAggregateOutputType | null
@@ -1203,6 +1274,19 @@ export namespace Prisma {
     title?: boolean
     maxPhotographers?: boolean
     availableSlots?: boolean
+    date?: boolean
+    location?: boolean
+    price?: boolean
+    duration?: boolean
+    overview?: boolean
+    focusSpecies?: boolean
+    itinerary?: boolean
+    included?: boolean
+    notIncluded?: boolean
+    equipment?: boolean
+    image?: boolean
+    gallery?: boolean
+    nonRefundableDeposit?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     bookings?: boolean | Tour$bookingsArgs<ExtArgs>
@@ -1215,6 +1299,19 @@ export namespace Prisma {
     title?: boolean
     maxPhotographers?: boolean
     availableSlots?: boolean
+    date?: boolean
+    location?: boolean
+    price?: boolean
+    duration?: boolean
+    overview?: boolean
+    focusSpecies?: boolean
+    itinerary?: boolean
+    included?: boolean
+    notIncluded?: boolean
+    equipment?: boolean
+    image?: boolean
+    gallery?: boolean
+    nonRefundableDeposit?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["tour"]>
@@ -1225,6 +1322,19 @@ export namespace Prisma {
     title?: boolean
     maxPhotographers?: boolean
     availableSlots?: boolean
+    date?: boolean
+    location?: boolean
+    price?: boolean
+    duration?: boolean
+    overview?: boolean
+    focusSpecies?: boolean
+    itinerary?: boolean
+    included?: boolean
+    notIncluded?: boolean
+    equipment?: boolean
+    image?: boolean
+    gallery?: boolean
+    nonRefundableDeposit?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["tour"]>
@@ -1235,11 +1345,24 @@ export namespace Prisma {
     title?: boolean
     maxPhotographers?: boolean
     availableSlots?: boolean
+    date?: boolean
+    location?: boolean
+    price?: boolean
+    duration?: boolean
+    overview?: boolean
+    focusSpecies?: boolean
+    itinerary?: boolean
+    included?: boolean
+    notIncluded?: boolean
+    equipment?: boolean
+    image?: boolean
+    gallery?: boolean
+    nonRefundableDeposit?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TourOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "maxPhotographers" | "availableSlots" | "createdAt" | "updatedAt", ExtArgs["result"]["tour"]>
+  export type TourOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "maxPhotographers" | "availableSlots" | "date" | "location" | "price" | "duration" | "overview" | "focusSpecies" | "itinerary" | "included" | "notIncluded" | "equipment" | "image" | "gallery" | "nonRefundableDeposit" | "createdAt" | "updatedAt", ExtArgs["result"]["tour"]>
   export type TourInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookings?: boolean | Tour$bookingsArgs<ExtArgs>
     _count?: boolean | TourCountOutputTypeDefaultArgs<ExtArgs>
@@ -1258,6 +1381,19 @@ export namespace Prisma {
       title: string
       maxPhotographers: number
       availableSlots: number
+      date: string
+      location: string
+      price: string
+      duration: string
+      overview: string
+      focusSpecies: string[]
+      itinerary: Prisma.JsonValue
+      included: string[]
+      notIncluded: string[]
+      equipment: string[]
+      image: string
+      gallery: string[]
+      nonRefundableDeposit: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["tour"]>
@@ -1689,6 +1825,19 @@ export namespace Prisma {
     readonly title: FieldRef<"Tour", 'String'>
     readonly maxPhotographers: FieldRef<"Tour", 'Int'>
     readonly availableSlots: FieldRef<"Tour", 'Int'>
+    readonly date: FieldRef<"Tour", 'String'>
+    readonly location: FieldRef<"Tour", 'String'>
+    readonly price: FieldRef<"Tour", 'String'>
+    readonly duration: FieldRef<"Tour", 'String'>
+    readonly overview: FieldRef<"Tour", 'String'>
+    readonly focusSpecies: FieldRef<"Tour", 'String[]'>
+    readonly itinerary: FieldRef<"Tour", 'Json'>
+    readonly included: FieldRef<"Tour", 'String[]'>
+    readonly notIncluded: FieldRef<"Tour", 'String[]'>
+    readonly equipment: FieldRef<"Tour", 'String[]'>
+    readonly image: FieldRef<"Tour", 'String'>
+    readonly gallery: FieldRef<"Tour", 'String[]'>
+    readonly nonRefundableDeposit: FieldRef<"Tour", 'Int'>
     readonly createdAt: FieldRef<"Tour", 'DateTime'>
     readonly updatedAt: FieldRef<"Tour", 'DateTime'>
   }
@@ -3256,6 +3405,19 @@ export namespace Prisma {
     title: 'title',
     maxPhotographers: 'maxPhotographers',
     availableSlots: 'availableSlots',
+    date: 'date',
+    location: 'location',
+    price: 'price',
+    duration: 'duration',
+    overview: 'overview',
+    focusSpecies: 'focusSpecies',
+    itinerary: 'itinerary',
+    included: 'included',
+    notIncluded: 'notIncluded',
+    equipment: 'equipment',
+    image: 'image',
+    gallery: 'gallery',
+    nonRefundableDeposit: 'nonRefundableDeposit',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -3283,12 +3445,28 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -3321,6 +3499,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -3364,6 +3556,19 @@ export namespace Prisma {
     title?: StringFilter<"Tour"> | string
     maxPhotographers?: IntFilter<"Tour"> | number
     availableSlots?: IntFilter<"Tour"> | number
+    date?: StringFilter<"Tour"> | string
+    location?: StringFilter<"Tour"> | string
+    price?: StringFilter<"Tour"> | string
+    duration?: StringFilter<"Tour"> | string
+    overview?: StringFilter<"Tour"> | string
+    focusSpecies?: StringNullableListFilter<"Tour">
+    itinerary?: JsonFilter<"Tour">
+    included?: StringNullableListFilter<"Tour">
+    notIncluded?: StringNullableListFilter<"Tour">
+    equipment?: StringNullableListFilter<"Tour">
+    image?: StringFilter<"Tour"> | string
+    gallery?: StringNullableListFilter<"Tour">
+    nonRefundableDeposit?: IntFilter<"Tour"> | number
     createdAt?: DateTimeFilter<"Tour"> | Date | string
     updatedAt?: DateTimeFilter<"Tour"> | Date | string
     bookings?: BookingListRelationFilter
@@ -3375,6 +3580,19 @@ export namespace Prisma {
     title?: SortOrder
     maxPhotographers?: SortOrder
     availableSlots?: SortOrder
+    date?: SortOrder
+    location?: SortOrder
+    price?: SortOrder
+    duration?: SortOrder
+    overview?: SortOrder
+    focusSpecies?: SortOrder
+    itinerary?: SortOrder
+    included?: SortOrder
+    notIncluded?: SortOrder
+    equipment?: SortOrder
+    image?: SortOrder
+    gallery?: SortOrder
+    nonRefundableDeposit?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     bookings?: BookingOrderByRelationAggregateInput
@@ -3389,6 +3607,19 @@ export namespace Prisma {
     title?: StringFilter<"Tour"> | string
     maxPhotographers?: IntFilter<"Tour"> | number
     availableSlots?: IntFilter<"Tour"> | number
+    date?: StringFilter<"Tour"> | string
+    location?: StringFilter<"Tour"> | string
+    price?: StringFilter<"Tour"> | string
+    duration?: StringFilter<"Tour"> | string
+    overview?: StringFilter<"Tour"> | string
+    focusSpecies?: StringNullableListFilter<"Tour">
+    itinerary?: JsonFilter<"Tour">
+    included?: StringNullableListFilter<"Tour">
+    notIncluded?: StringNullableListFilter<"Tour">
+    equipment?: StringNullableListFilter<"Tour">
+    image?: StringFilter<"Tour"> | string
+    gallery?: StringNullableListFilter<"Tour">
+    nonRefundableDeposit?: IntFilter<"Tour"> | number
     createdAt?: DateTimeFilter<"Tour"> | Date | string
     updatedAt?: DateTimeFilter<"Tour"> | Date | string
     bookings?: BookingListRelationFilter
@@ -3400,6 +3631,19 @@ export namespace Prisma {
     title?: SortOrder
     maxPhotographers?: SortOrder
     availableSlots?: SortOrder
+    date?: SortOrder
+    location?: SortOrder
+    price?: SortOrder
+    duration?: SortOrder
+    overview?: SortOrder
+    focusSpecies?: SortOrder
+    itinerary?: SortOrder
+    included?: SortOrder
+    notIncluded?: SortOrder
+    equipment?: SortOrder
+    image?: SortOrder
+    gallery?: SortOrder
+    nonRefundableDeposit?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TourCountOrderByAggregateInput
@@ -3418,6 +3662,19 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Tour"> | string
     maxPhotographers?: IntWithAggregatesFilter<"Tour"> | number
     availableSlots?: IntWithAggregatesFilter<"Tour"> | number
+    date?: StringWithAggregatesFilter<"Tour"> | string
+    location?: StringWithAggregatesFilter<"Tour"> | string
+    price?: StringWithAggregatesFilter<"Tour"> | string
+    duration?: StringWithAggregatesFilter<"Tour"> | string
+    overview?: StringWithAggregatesFilter<"Tour"> | string
+    focusSpecies?: StringNullableListFilter<"Tour">
+    itinerary?: JsonWithAggregatesFilter<"Tour">
+    included?: StringNullableListFilter<"Tour">
+    notIncluded?: StringNullableListFilter<"Tour">
+    equipment?: StringNullableListFilter<"Tour">
+    image?: StringWithAggregatesFilter<"Tour"> | string
+    gallery?: StringNullableListFilter<"Tour">
+    nonRefundableDeposit?: IntWithAggregatesFilter<"Tour"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Tour"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Tour"> | Date | string
   }
@@ -3490,6 +3747,19 @@ export namespace Prisma {
     title: string
     maxPhotographers: number
     availableSlots: number
+    date: string
+    location: string
+    price: string
+    duration: string
+    overview: string
+    focusSpecies?: TourCreatefocusSpeciesInput | string[]
+    itinerary: JsonNullValueInput | InputJsonValue
+    included?: TourCreateincludedInput | string[]
+    notIncluded?: TourCreatenotIncludedInput | string[]
+    equipment?: TourCreateequipmentInput | string[]
+    image: string
+    gallery?: TourCreategalleryInput | string[]
+    nonRefundableDeposit: number
     createdAt?: Date | string
     updatedAt?: Date | string
     bookings?: BookingCreateNestedManyWithoutTourInput
@@ -3501,6 +3771,19 @@ export namespace Prisma {
     title: string
     maxPhotographers: number
     availableSlots: number
+    date: string
+    location: string
+    price: string
+    duration: string
+    overview: string
+    focusSpecies?: TourCreatefocusSpeciesInput | string[]
+    itinerary: JsonNullValueInput | InputJsonValue
+    included?: TourCreateincludedInput | string[]
+    notIncluded?: TourCreatenotIncludedInput | string[]
+    equipment?: TourCreateequipmentInput | string[]
+    image: string
+    gallery?: TourCreategalleryInput | string[]
+    nonRefundableDeposit: number
     createdAt?: Date | string
     updatedAt?: Date | string
     bookings?: BookingUncheckedCreateNestedManyWithoutTourInput
@@ -3512,6 +3795,19 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     maxPhotographers?: IntFieldUpdateOperationsInput | number
     availableSlots?: IntFieldUpdateOperationsInput | number
+    date?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    focusSpecies?: TourUpdatefocusSpeciesInput | string[]
+    itinerary?: JsonNullValueInput | InputJsonValue
+    included?: TourUpdateincludedInput | string[]
+    notIncluded?: TourUpdatenotIncludedInput | string[]
+    equipment?: TourUpdateequipmentInput | string[]
+    image?: StringFieldUpdateOperationsInput | string
+    gallery?: TourUpdategalleryInput | string[]
+    nonRefundableDeposit?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bookings?: BookingUpdateManyWithoutTourNestedInput
@@ -3523,6 +3819,19 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     maxPhotographers?: IntFieldUpdateOperationsInput | number
     availableSlots?: IntFieldUpdateOperationsInput | number
+    date?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    focusSpecies?: TourUpdatefocusSpeciesInput | string[]
+    itinerary?: JsonNullValueInput | InputJsonValue
+    included?: TourUpdateincludedInput | string[]
+    notIncluded?: TourUpdatenotIncludedInput | string[]
+    equipment?: TourUpdateequipmentInput | string[]
+    image?: StringFieldUpdateOperationsInput | string
+    gallery?: TourUpdategalleryInput | string[]
+    nonRefundableDeposit?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bookings?: BookingUncheckedUpdateManyWithoutTourNestedInput
@@ -3534,6 +3843,19 @@ export namespace Prisma {
     title: string
     maxPhotographers: number
     availableSlots: number
+    date: string
+    location: string
+    price: string
+    duration: string
+    overview: string
+    focusSpecies?: TourCreatefocusSpeciesInput | string[]
+    itinerary: JsonNullValueInput | InputJsonValue
+    included?: TourCreateincludedInput | string[]
+    notIncluded?: TourCreatenotIncludedInput | string[]
+    equipment?: TourCreateequipmentInput | string[]
+    image: string
+    gallery?: TourCreategalleryInput | string[]
+    nonRefundableDeposit: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3544,6 +3866,19 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     maxPhotographers?: IntFieldUpdateOperationsInput | number
     availableSlots?: IntFieldUpdateOperationsInput | number
+    date?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    focusSpecies?: TourUpdatefocusSpeciesInput | string[]
+    itinerary?: JsonNullValueInput | InputJsonValue
+    included?: TourUpdateincludedInput | string[]
+    notIncluded?: TourUpdatenotIncludedInput | string[]
+    equipment?: TourUpdateequipmentInput | string[]
+    image?: StringFieldUpdateOperationsInput | string
+    gallery?: TourUpdategalleryInput | string[]
+    nonRefundableDeposit?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3554,6 +3889,19 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     maxPhotographers?: IntFieldUpdateOperationsInput | number
     availableSlots?: IntFieldUpdateOperationsInput | number
+    date?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    focusSpecies?: TourUpdatefocusSpeciesInput | string[]
+    itinerary?: JsonNullValueInput | InputJsonValue
+    included?: TourUpdateincludedInput | string[]
+    notIncluded?: TourUpdatenotIncludedInput | string[]
+    equipment?: TourUpdateequipmentInput | string[]
+    image?: StringFieldUpdateOperationsInput | string
+    gallery?: TourUpdategalleryInput | string[]
+    nonRefundableDeposit?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3646,6 +3994,37 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3673,6 +4052,19 @@ export namespace Prisma {
     title?: SortOrder
     maxPhotographers?: SortOrder
     availableSlots?: SortOrder
+    date?: SortOrder
+    location?: SortOrder
+    price?: SortOrder
+    duration?: SortOrder
+    overview?: SortOrder
+    focusSpecies?: SortOrder
+    itinerary?: SortOrder
+    included?: SortOrder
+    notIncluded?: SortOrder
+    equipment?: SortOrder
+    image?: SortOrder
+    gallery?: SortOrder
+    nonRefundableDeposit?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3680,6 +4072,7 @@ export namespace Prisma {
   export type TourAvgOrderByAggregateInput = {
     maxPhotographers?: SortOrder
     availableSlots?: SortOrder
+    nonRefundableDeposit?: SortOrder
   }
 
   export type TourMaxOrderByAggregateInput = {
@@ -3688,6 +4081,13 @@ export namespace Prisma {
     title?: SortOrder
     maxPhotographers?: SortOrder
     availableSlots?: SortOrder
+    date?: SortOrder
+    location?: SortOrder
+    price?: SortOrder
+    duration?: SortOrder
+    overview?: SortOrder
+    image?: SortOrder
+    nonRefundableDeposit?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3698,6 +4098,13 @@ export namespace Prisma {
     title?: SortOrder
     maxPhotographers?: SortOrder
     availableSlots?: SortOrder
+    date?: SortOrder
+    location?: SortOrder
+    price?: SortOrder
+    duration?: SortOrder
+    overview?: SortOrder
+    image?: SortOrder
+    nonRefundableDeposit?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3705,6 +4112,7 @@ export namespace Prisma {
   export type TourSumOrderByAggregateInput = {
     maxPhotographers?: SortOrder
     availableSlots?: SortOrder
+    nonRefundableDeposit?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3739,6 +4147,32 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3795,6 +4229,26 @@ export namespace Prisma {
     amount?: SortOrder
   }
 
+  export type TourCreatefocusSpeciesInput = {
+    set: string[]
+  }
+
+  export type TourCreateincludedInput = {
+    set: string[]
+  }
+
+  export type TourCreatenotIncludedInput = {
+    set: string[]
+  }
+
+  export type TourCreateequipmentInput = {
+    set: string[]
+  }
+
+  export type TourCreategalleryInput = {
+    set: string[]
+  }
+
   export type BookingCreateNestedManyWithoutTourInput = {
     create?: XOR<BookingCreateWithoutTourInput, BookingUncheckedCreateWithoutTourInput> | BookingCreateWithoutTourInput[] | BookingUncheckedCreateWithoutTourInput[]
     connectOrCreate?: BookingCreateOrConnectWithoutTourInput | BookingCreateOrConnectWithoutTourInput[]
@@ -3819,6 +4273,31 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type TourUpdatefocusSpeciesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TourUpdateincludedInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TourUpdatenotIncludedInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TourUpdateequipmentInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TourUpdategalleryInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -3946,6 +4425,29 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -4021,6 +4523,19 @@ export namespace Prisma {
     title: string
     maxPhotographers: number
     availableSlots: number
+    date: string
+    location: string
+    price: string
+    duration: string
+    overview: string
+    focusSpecies?: TourCreatefocusSpeciesInput | string[]
+    itinerary: JsonNullValueInput | InputJsonValue
+    included?: TourCreateincludedInput | string[]
+    notIncluded?: TourCreatenotIncludedInput | string[]
+    equipment?: TourCreateequipmentInput | string[]
+    image: string
+    gallery?: TourCreategalleryInput | string[]
+    nonRefundableDeposit: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4031,6 +4546,19 @@ export namespace Prisma {
     title: string
     maxPhotographers: number
     availableSlots: number
+    date: string
+    location: string
+    price: string
+    duration: string
+    overview: string
+    focusSpecies?: TourCreatefocusSpeciesInput | string[]
+    itinerary: JsonNullValueInput | InputJsonValue
+    included?: TourCreateincludedInput | string[]
+    notIncluded?: TourCreatenotIncludedInput | string[]
+    equipment?: TourCreateequipmentInput | string[]
+    image: string
+    gallery?: TourCreategalleryInput | string[]
+    nonRefundableDeposit: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4057,6 +4585,19 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     maxPhotographers?: IntFieldUpdateOperationsInput | number
     availableSlots?: IntFieldUpdateOperationsInput | number
+    date?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    focusSpecies?: TourUpdatefocusSpeciesInput | string[]
+    itinerary?: JsonNullValueInput | InputJsonValue
+    included?: TourUpdateincludedInput | string[]
+    notIncluded?: TourUpdatenotIncludedInput | string[]
+    equipment?: TourUpdateequipmentInput | string[]
+    image?: StringFieldUpdateOperationsInput | string
+    gallery?: TourUpdategalleryInput | string[]
+    nonRefundableDeposit?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4067,6 +4608,19 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     maxPhotographers?: IntFieldUpdateOperationsInput | number
     availableSlots?: IntFieldUpdateOperationsInput | number
+    date?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    focusSpecies?: TourUpdatefocusSpeciesInput | string[]
+    itinerary?: JsonNullValueInput | InputJsonValue
+    included?: TourUpdateincludedInput | string[]
+    notIncluded?: TourUpdatenotIncludedInput | string[]
+    equipment?: TourUpdateequipmentInput | string[]
+    image?: StringFieldUpdateOperationsInput | string
+    gallery?: TourUpdategalleryInput | string[]
+    nonRefundableDeposit?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

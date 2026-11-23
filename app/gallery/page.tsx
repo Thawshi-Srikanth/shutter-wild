@@ -1,8 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CategorizedGallery from "@/components/CategorizedGallery";
-import { tours } from "@/data/tours";
+import { tours as staticTours } from "@/data/tours";
 import { Metadata } from "next";
+import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Gallery | Shutter Wild",
@@ -10,9 +11,18 @@ export const metadata: Metadata = {
     "A collection of wildlife photography from our global expeditions.",
 };
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  let dbTours: any[] = [];
+  try {
+    dbTours = (await prisma.tour.findMany()) as any[];
+  } catch (err) {
+    console.error("Gallery query failed, falling back to static:", err);
+  }
+
+  const toursList = dbTours && dbTours.length > 0 ? dbTours : staticTours;
+
   // Extract images and group them by tour
-  const categorizedData = tours
+  const categorizedData = toursList
     .filter((t) => (t.gallery && t.gallery.length > 0) || t.image)
     .map((t) => {
       const tourImages = [];

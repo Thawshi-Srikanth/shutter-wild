@@ -3,12 +3,12 @@ import type {NextConfig} from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   typescript: {
     ignoreBuildErrors: false,
   },
-  // Allow access to remote image placeholder.
+  // Allow access to remote image placeholder and Vercel Blob storage.
   images: {
     remotePatterns: [
       {
@@ -17,9 +17,14 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**', // This allows any path under the hostname
       },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
-  output: 'standalone',
   transpilePackages: ['motion'],
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.
