@@ -10,6 +10,7 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { X, Mail } from "lucide-react";
 import Image from "next/image";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
 interface NewsletterModalContextType {
   openModal: () => void;
@@ -95,7 +96,7 @@ export function NewsletterModalProvider({ children }: { children: ReactNode }) {
               {/* Image Section */}
               <div className="relative w-full md:w-1/2 h-56 md:h-auto">
                 <Image
-                  src="/captures/Pantanal Jaguar/jaguar-on-tree-pantanal-brazil-2.webp"
+                  src={SITE_MEDIA.newsletterModal}
                   alt="Wildlife Newsletter"
                   fill
                   className="object-cover"

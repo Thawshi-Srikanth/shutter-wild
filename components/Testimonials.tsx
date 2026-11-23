@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
 export default function Testimonials() {
   return (
@@ -42,7 +43,7 @@ export default function Testimonials() {
 
         <div className="relative aspect-[4/3] overflow-hidden shadow-2xl">
           <Image
-            src="/captures/Poland Autumn/grey-wolf-poland-autumn-1.webp" // Wolf
+            src={SITE_MEDIA.testimonials}
             alt="Sophia Martinez"
             fill
             className="object-cover"

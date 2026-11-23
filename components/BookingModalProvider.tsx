@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { X, Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
 interface BookingModalContextType {
   openModal: (tourName: string) => void;
@@ -115,7 +116,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
               {/* Image Section (Visible on large screens) */}
               <div className="hidden lg:block lg:w-2/5 relative">
                 <Image
-                  src="/captures/India Tiger/bengal-tiger-eye-contact-india.webp" // Tiger image
+                  src={SITE_MEDIA.bookingModal}
                   alt="Booking nature background"
                   fill
                   className="object-cover"
