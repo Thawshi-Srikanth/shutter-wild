@@ -5,6 +5,7 @@ import { Mail, Phone } from "lucide-react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
 export default function Footer() {
   return (
@@ -12,7 +13,7 @@ export default function Footer() {
       {/* Background Image Overlay */}
       <div className="absolute inset-0 z-0 opacity-20">
         <Image
-          src="/captures/Norway Winter/goshawk-forest-winter-norway.webp" // Goshawk
+          src={SITE_MEDIA.footer}
           alt="Footer Background"
           fill
           className="object-cover"

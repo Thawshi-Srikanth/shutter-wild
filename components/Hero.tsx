@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
 export default function Hero() {
   const { scrollYProgress } = useScroll({
@@ -17,7 +18,7 @@ export default function Hero() {
       {/* Background Image Parallax */}
       <motion.div style={{ y }} className="absolute inset-[-10%] z-0">
         <Image
-          src="/captures/Sri Lanka/sri-lanka-leopard-yala.webp"
+          src={SITE_MEDIA.hero}
           alt="Wildlife Background"
           fill
           className="object-cover opacity-60 object-[15%_10%] md:object-center"

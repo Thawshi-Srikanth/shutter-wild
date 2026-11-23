@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div className="relative aspect-[4/3] overflow-hidden shadow-2xl">
           <Image
-            src="/captures/Sri Lanka/asian-elephant-yala-national-park.webp" // Elephant
+            src={SITE_MEDIA.about}
             alt="Photographer in the wild"
             fill
             className="object-cover"

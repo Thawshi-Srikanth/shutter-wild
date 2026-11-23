@@ -4,18 +4,9 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaInstagram } from "react-icons/fa";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
-// Mocking the feed with visually stunning placeholders
-const instaPosts = [
-  "/captures/Autumn Norway/wildlife photography norway – sparrowhawk action in autumn-12.webp",
-  "/captures/India Tiger/bengal-tiger-india-safari.webp",
-  "/captures/Norway Winter/goshawk-in-snow-norway-2.webp",
-  "/captures/Pantanal Jaguar/jaguar-pantanal-brazil-riverbank.webp",
-  "/captures/Poland Autumn/white-tailed-eagle-flight-poland-autumn-1.webp",
-  "/captures/Poland Winter/raven-in-flight-winter-poland.webp",
-  "/captures/Sri Lanka/sloth-bear-yala-national-park.webp",
-  "/captures/India Tiger/bengal-tiger-close-portrait-india.webp",
-];
+const instaPosts = SITE_MEDIA.instagram;
 
 export default function InstagramGrid() {
   return (

@@ -8,6 +8,7 @@ import { NewsletterModalProvider } from "@/components/NewsletterModalProvider";
 import ImageProtector from "@/components/ImageProtector";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Script from "next/script";
+import { SITE_MEDIA } from "@/lib/siteMedia";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -60,7 +61,7 @@ export const metadata: Metadata = {
       "Immersive wildlife photography journeys built around ethical encounters, fieldcraft knowledge, and meaningful storytelling.",
     images: [
       {
-        url: "/captures/Norway Winter/golden-eagle-hunting-winter-norway.webp",
+        url: SITE_MEDIA.ogImage,
         width: 1200,
         height: 630,
         alt: "Golden Eagle hunting in Winter Norway",
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
     title: "Shutter Wild - Premium Wildlife Photography Expeditions",
     description:
       "Immersive wildlife photography journeys built around ethical encounters and professional guidance.",
-    images: ["/captures/Norway Winter/golden-eagle-hunting-winter-norway.webp"],
+    images: [SITE_MEDIA.ogImage],
   },
   robots: {
     index: true,
