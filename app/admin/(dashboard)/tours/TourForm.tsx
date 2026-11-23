@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { upsertTour, TourInput } from "../../actions";
 import { upload } from "@vercel/blob/client";
 import { deleteImageAction } from "../../upload";
+import MediaLibraryModal from "./MediaLibraryModal";
 
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 const MAX_IMAGE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
@@ -166,6 +167,9 @@ export default function TourForm({ initialData }: TourFormProps) {
   const [isUploadingGallery, setIsUploadingGallery] = useState(false);
   const [isDragActiveBanner, setIsDragActiveBanner] = useState(false);
   const [isDragActiveGallery, setIsDragActiveGallery] = useState(false);
+  const [mediaPickerMode, setMediaPickerMode] = useState<
+    "banner" | "gallery" | null
+  >(null);
 
   const handleDragBanner = (e: React.DragEvent) => {
     e.preventDefault();
@@ -198,7 +202,7 @@ export default function TourForm({ initialData }: TourFormProps) {
       const url = await uploadFileToBlob(file);
       setImage(url);
       if (oldImage) {
-        await deleteImageAction(oldImage);
+        await deleteImageAction(oldImage, initialData?.id);
       }
     } catch (err) {
       console.error(err);
@@ -320,7 +324,7 @@ export default function TourForm({ initialData }: TourFormProps) {
     const targetUrl = gallery[index];
     setGallery(gallery.filter((_, i) => i !== index));
     if (targetUrl) {
-      deleteImageAction(targetUrl).catch((err) => {
+      deleteImageAction(targetUrl, initialData?.id).catch((err) => {
         console.error("Failed to delete gallery image from Vercel Blob:", err);
       });
     }
@@ -958,9 +962,18 @@ export default function TourForm({ initialData }: TourFormProps) {
 
             {/* 1. Cover Banner Upload & Drag-and-Drop */}
             <div className="space-y-4">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-500 block">
-                Expedition Cover Banner
-              </label>
+              <div className="flex items-center justify-between gap-3">
+                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 block">
+                  Expedition Cover Banner
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setMediaPickerMode("banner")}
+                  className="px-3 py-1.5 border border-[#1E2E22]/30 bg-[#F4F4F0] hover:bg-[#1E2E22] hover:text-white text-[#1E2E22] text-[10px] font-bold uppercase tracking-wider rounded-sm transition-colors cursor-pointer"
+                >
+                  Choose from Library
+                </button>
+              </div>
               
               <div 
                 onDragEnter={handleDragBanner}
@@ -1035,9 +1048,18 @@ export default function TourForm({ initialData }: TourFormProps) {
 
             {/* 2. Gallery Slideshow Drag & Drop */}
             <div className="space-y-4">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-500 block">
-                Slideshow Gallery
-              </label>
+              <div className="flex items-center justify-between gap-3">
+                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 block">
+                  Slideshow Gallery
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setMediaPickerMode("gallery")}
+                  className="px-3 py-1.5 border border-[#1E2E22]/30 bg-[#F4F4F0] hover:bg-[#1E2E22] hover:text-white text-[#1E2E22] text-[10px] font-bold uppercase tracking-wider rounded-sm transition-colors cursor-pointer"
+                >
+                  Choose from Library
+                </button>
+              </div>
 
               {/* Upload Dropzone */}
               <div
@@ -1092,6 +1114,30 @@ export default function TourForm({ initialData }: TourFormProps) {
               {/* Grid of gallery previews */}
               <GalleryGrid gallery={gallery} onRemove={removeGalleryImage} />
             </div>
+
+            <MediaLibraryModal
+              open={mediaPickerMode !== null}
+              mode={mediaPickerMode === "banner" ? "single" : "multiple"}
+              alreadySelected={
+                mediaPickerMode === "banner"
+                  ? image
+                    ? [image]
+                    : []
+                  : gallery
+              }
+              onClose={() => setMediaPickerMode(null)}
+              onSelect={(urls) => {
+                if (mediaPickerMode === "banner" && urls[0]) {
+                  setImage(urls[0]);
+                } else if (mediaPickerMode === "gallery") {
+                  setGallery((prev) => {
+                    const existing = new Set(prev);
+                    const next = urls.filter((u) => !existing.has(u));
+                    return [...prev, ...next];
+                  });
+                }
+              }}
+            />
           </div>
         )}
       </div>
