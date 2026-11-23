@@ -1,6 +1,6 @@
-import { PrismaClient } from "../app/generated/prisma/client";
+import { Prisma, PrismaClient } from "../app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { put } from "@vercel/blob";
 import { tours as staticTours } from "../data/tours";
 import fs from "fs";
 import path from "path";
@@ -18,16 +18,6 @@ const prisma = new PrismaClient({
   adapter,
 });
 
-// Configure R2 Client
-const r2Client = new S3Client({
-  endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID || "",
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "",
-  },
-  region: "auto",
-});
-
 const getMimeType = (filePath: string): string => {
   const ext = path.extname(filePath).toLowerCase();
   const mimeTypes: Record<string, string> = {
@@ -40,7 +30,7 @@ const getMimeType = (filePath: string): string => {
   return mimeTypes[ext] || "application/octet-stream";
 };
 
-async function uploadToR2(localPath: string): Promise<string | null> {
+async function uploadToBlob(localPath: string): Promise<string | null> {
   // If the path is already a public web URL, return it directly
   if (localPath.startsWith("http://") || localPath.startsWith("https://")) {
     console.log(`- Skipping (already dynamic URL): ${localPath}`);
@@ -48,12 +38,12 @@ async function uploadToR2(localPath: string): Promise<string | null> {
   }
 
   // Resolve absolute path in public directory
-  const relativeClean = localPath.replace(/^\/+/, "");
-  const publicDir = path.join(process.cwd(), "public");
-  const absolutePath = path.normalize(path.join(publicDir, relativeClean));
+  const relativeClean = path.normalize(localPath).replace(/^(\.\.[/\\])+/, "").replace(/^[/\\]+/, "");
+  const publicDir = path.resolve(process.cwd(), "public");
+  const absolutePath = path.resolve(publicDir, relativeClean);
 
   // Path traversal check
-  if (!absolutePath.startsWith(publicDir)) {
+  if (!absolutePath.startsWith(publicDir + path.sep)) {
     console.warn(`⚠️ Path traversal attempt detected or invalid path: ${localPath}`);
     return null;
   }
@@ -71,38 +61,26 @@ async function uploadToR2(localPath: string): Promise<string | null> {
   console.log(`- Uploading ${localPath} -> Key: ${secureFileName} (${mimeType})`);
 
   try {
-    const command = new PutObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME || "",
-      Key: secureFileName,
-      Body: fileBuffer,
-      ContentType: mimeType,
+    const blob = await put(secureFileName, fileBuffer, {
+      access: "public",
+      contentType: mimeType,
     });
 
-    await r2Client.send(command);
-
-    // Format target public URL
-    const publicUrlBase = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "";
-    const sanitizedUrlBase = publicUrlBase.startsWith("http")
-      ? publicUrlBase.replace(/\/+$/, "")
-      : `https://${publicUrlBase.replace(/\/+$/, "")}`;
-
-    const finalUrl = `${sanitizedUrlBase}/${secureFileName}`;
-    console.log(`  └─ Success: ${finalUrl}`);
-    return finalUrl;
+    console.log(`  └─ Success: ${blob.url}`);
+    return blob.url;
   } catch (error) {
-    console.error(`❌ Failed to upload ${localPath} to R2:`, error);
+    console.error(`❌ Failed to upload ${localPath} to Vercel Blob:`, error);
     return null;
   }
 }
 
 async function main() {
   console.log("=========================================");
-  console.log("🚀 Shutter-Wild: Cloudflare R2 Migrator  ");
+  console.log("🚀 Shutter-Wild: Vercel Blob Migrator    ");
   console.log("=========================================");
 
-  // Check variables first
-  if (!process.env.R2_ACCOUNT_ID || !process.env.R2_BUCKET_NAME) {
-    console.error("❌ Cloudflare R2 credentials missing in .env.local!");
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    console.error("❌ BLOB_READ_WRITE_TOKEN missing in .env.local!");
     process.exit(1);
   }
 
@@ -125,7 +103,7 @@ async function main() {
           duration: staticTour.duration,
           overview: staticTour.overview,
           focusSpecies: staticTour.focusSpecies,
-          itinerary: staticTour.itinerary as any,
+          itinerary: staticTour.itinerary as unknown as Prisma.InputJsonValue,
           included: staticTour.included,
           notIncluded: staticTour.notIncluded,
           equipment: staticTour.equipment,
@@ -148,7 +126,7 @@ async function main() {
     // A. Migrate Cover Image
     let updatedCover = tour.image;
     if (tour.image && !tour.image.startsWith("http")) {
-      const uploadedUrl = await uploadToR2(tour.image);
+      const uploadedUrl = await uploadToBlob(tour.image);
       if (uploadedUrl) {
         updatedCover = uploadedUrl;
       }
@@ -160,7 +138,7 @@ async function main() {
 
     for (const imgPath of galleryItems) {
       if (imgPath && !imgPath.startsWith("http")) {
-        const uploadedUrl = await uploadToR2(imgPath);
+        const uploadedUrl = await uploadToBlob(imgPath);
         if (uploadedUrl) {
           updatedGallery.push(uploadedUrl);
         } else {
@@ -185,7 +163,7 @@ async function main() {
   }
 
   console.log("\n=========================================");
-  console.log("🎉 Cloudflare R2 Media Migration Complete!");
+  console.log("🎉 Vercel Blob Media Migration Complete! ");
   console.log("=========================================");
 }
 

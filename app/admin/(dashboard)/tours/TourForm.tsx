@@ -3,7 +3,28 @@
 import { useState, useTransition, memo } from "react";
 import { useRouter } from "next/navigation";
 import { upsertTour, TourInput } from "../../actions";
-import { uploadImageAction, deleteImageAction } from "../../upload";
+import { upload } from "@vercel/blob/client";
+import { deleteImageAction } from "../../upload";
+
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+const MAX_IMAGE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
+
+async function uploadFileToBlob(file: File): Promise<string> {
+  if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+    throw new Error("Invalid file type. Only JPEG, PNG, WEBP, and GIF are allowed.");
+  }
+  if (file.size > MAX_IMAGE_SIZE_BYTES) {
+    throw new Error("File exceeds 10MB size limit.");
+  }
+
+  const ext = file.name.split(".").pop() || "webp";
+  const filename = `${crypto.randomUUID()}.${ext}`;
+  const blob = await upload(filename, file, {
+    access: "public",
+    handleUploadUrl: "/api/upload",
+  });
+  return blob.url;
+}
 
 import {
   ArrowLeft,
@@ -36,10 +57,12 @@ const BannerPreview = memo(({ image }: { image: string }) => {
 
   return (
     <>
-      <img
+      <Image
         src={image}
         alt="Banner Preview"
-        loading="lazy"
+        width={1200}
+        height={600}
+        unoptimized
         className="object-cover w-full h-full transition-opacity duration-300"
         onError={(e) => {
           (e.target as HTMLElement).style.display = "none";
@@ -62,10 +85,12 @@ const GalleryGrid = memo(({ gallery, onRemove }: { gallery: string[]; onRemove: 
           key={path + index}
           className="group bg-gray-50 border rounded-sm relative aspect-[4/3] overflow-hidden"
         >
-          <img
+          <Image
             src={path}
             alt=""
-            loading="lazy"
+            width={400}
+            height={300}
+            unoptimized
             className="object-cover w-full h-full transition-opacity duration-300"
           />
           <button
@@ -169,25 +194,36 @@ export default function TourForm({ initialData }: TourFormProps) {
 
     const oldImage = image;
 
-    const formData = new FormData();
-    formData.append("file", file);
-
     try {
-      const res = await uploadImageAction(formData);
-      if (res.success && res.url) {
-        setImage(res.url);
-        if (oldImage) {
-          await deleteImageAction(oldImage);
-        }
-      } else {
-        setError(res.error || "Failed to upload banner image.");
+      const url = await uploadFileToBlob(file);
+      setImage(url);
+      if (oldImage) {
+        await deleteImageAction(oldImage);
       }
     } catch (err) {
       console.error(err);
-      setError("An unexpected error occurred during cover banner upload.");
+      setError(err instanceof Error ? err.message : "An unexpected error occurred during cover banner upload.");
     } finally {
       setIsUploadingBanner(false);
     }
+  };
+
+  const uploadGalleryFiles = async (files: File[]) => {
+    if (files.length === 0) return;
+
+    setIsUploadingGallery(true);
+    setError(null);
+
+    for (const file of files) {
+      try {
+        const url = await uploadFileToBlob(file);
+        setGallery((prev) => [...prev, url]);
+      } catch (err) {
+        console.error(err);
+        setError(err instanceof Error ? err.message : `An unexpected error occurred during upload for ${file.name}`);
+      }
+    }
+    setIsUploadingGallery(false);
   };
 
   const handleDragGallery = (e: React.DragEvent) => {
@@ -206,27 +242,7 @@ export default function TourForm({ initialData }: TourFormProps) {
     setIsDragActiveGallery(false);
 
     const files = Array.from(e.dataTransfer.files);
-    if (files.length === 0) return;
-
-    setIsUploadingGallery(true);
-    setError(null);
-
-    for (const file of files) {
-      const formData = new FormData();
-      formData.append("file", file);
-      try {
-        const res = await uploadImageAction(formData);
-        if (res.success && res.url) {
-          setGallery((prev) => [...prev, res.url]);
-        } else {
-          setError(res.error || `Failed to upload ${file.name}`);
-        }
-      } catch (err) {
-        console.error(err);
-        setError(`An unexpected error occurred during upload for ${file.name}`);
-      }
-    }
-    setIsUploadingGallery(false);
+    await uploadGalleryFiles(files);
   };
 
   // --- Slug Auto Generation ---
@@ -305,7 +321,7 @@ export default function TourForm({ initialData }: TourFormProps) {
     setGallery(gallery.filter((_, i) => i !== index));
     if (targetUrl) {
       deleteImageAction(targetUrl).catch((err) => {
-        console.error("Failed to delete gallery image from R2:", err);
+        console.error("Failed to delete gallery image from Vercel Blob:", err);
       });
     }
   };
@@ -961,10 +977,12 @@ export default function TourForm({ initialData }: TourFormProps) {
               >
                 {image ? (
                   <div className="group relative w-full h-full">
-                    <img
+                    <Image
                       src={image}
                       alt="Cover Preview"
-                      loading="lazy"
+                      width={1200}
+                      height={600}
+                      unoptimized
                       className="object-cover w-full h-full transition-opacity duration-300"
                     />
                     {/* Hover state */}
@@ -1063,25 +1081,7 @@ export default function TourForm({ initialData }: TourFormProps) {
                   accept="image/*"
                   onChange={async (e) => {
                     const files = Array.from(e.target.files || []);
-                    if (files.length === 0) return;
-                    setIsUploadingGallery(true);
-                    setError(null);
-                    for (const file of files) {
-                      const formData = new FormData();
-                      formData.append("file", file);
-                      try {
-                        const res = await uploadImageAction(formData);
-                        if (res.success && res.url) {
-                          setGallery((prev) => [...prev, res.url]);
-                        } else {
-                          setError(res.error || `Failed to upload ${file.name}`);
-                        }
-                      } catch (err) {
-                        console.error(err);
-                        setError(`An unexpected error occurred during upload for ${file.name}`);
-                      }
-                    }
-                    setIsUploadingGallery(false);
+                    await uploadGalleryFiles(files);
                     e.target.value = "";
                   }}
                   disabled={isUploadingGallery}

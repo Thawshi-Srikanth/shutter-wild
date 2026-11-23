@@ -1,80 +1,68 @@
 "use server";
 
 import { getSession } from "@/lib/auth";
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { put, del } from "@vercel/blob";
 import crypto from "crypto";
+import path from "path";
 
-// Initialize Cloudflare R2 S3-Compatible Client
-const r2Client = new S3Client({
-  endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID || "",
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "",
-  },
-  region: "auto",
-});
+const ALLOWED_MIME_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+];
 
+const MAX_SERVER_ACTION_SIZE_BYTES = 4 * 1024 * 1024; // 4MB (Vercel Server Action limit is 4.5MB)
+
+/**
+ * Server-side image upload to Vercel Blob (for files up to 4MB).
+ * Larger files should use the client upload route (/api/upload).
+ */
 export async function uploadImageAction(formData: FormData) {
-  // Enforce session check
   const session = await getSession();
   if (!session) {
     return { success: false, error: "Unauthorized access." };
   }
 
-  const file = formData.get("file") as File;
+  const file = formData.get("file") as File | null;
   if (!file) {
     return { success: false, error: "No file selected." };
   }
 
-  // 1. Strict validation (Types and size limits to prevent injection/DoS)
-  const allowedMimeTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-  if (!allowedMimeTypes.includes(file.type)) {
+  if (!ALLOWED_MIME_TYPES.includes(file.type)) {
     return {
       success: false,
       error: "Invalid file type. Only JPEG, PNG, WEBP, and GIF are allowed.",
     };
   }
 
-  if (file.size > 10 * 1024 * 1024) {
-    // 10MB limit
-    return { success: false, error: "File exceeds 10MB size limit." };
+  if (file.size > MAX_SERVER_ACTION_SIZE_BYTES) {
+    return {
+      success: false,
+      error: "File exceeds 4MB server action limit.",
+    };
   }
 
   try {
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const ext = path.extname(path.basename(file.name)) || ".webp";
+    const secureFileName = `${crypto.randomUUID()}${ext}`;
 
-    // 2. Generate a secure, unpredictable unique filename
-    const fileExtension = file.name.split(".").pop() || "webp";
-    const secureFileName = `${crypto.randomUUID()}.${fileExtension}`;
-
-    // 3. Upload command execution
-    const command = new PutObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME || "",
-      Key: secureFileName,
-      Body: buffer,
-      ContentType: file.type,
+    const blob = await put(secureFileName, file, {
+      access: "public",
+      contentType: file.type,
     });
 
-    await r2Client.send(command);
-
-    // 4. Return the public CDN URL
-    const publicUrlBase = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "";
-    // Clean trailing slashes to build clean asset path
-    const sanitizedUrlBase = publicUrlBase.replace(/\/+$/, "");
-    const publicUrl = sanitizedUrlBase.startsWith("http") 
-      ? `${sanitizedUrlBase}/${secureFileName}`
-      : `https://${sanitizedUrlBase}/${secureFileName}`;
-
-    return { success: true, url: publicUrl };
+    return { success: true, url: blob.url };
   } catch (error) {
-    console.error("Cloudflare R2 Upload error:", error);
-    return { success: false, error: "Failed to upload image to Cloudflare R2." };
+    console.error("Vercel Blob Upload error:", error);
+    return { success: false, error: "Failed to upload image to Vercel Blob." };
   }
 }
 
+/**
+ * Deletes an image from Vercel Blob if the URL belongs to Vercel Blob storage.
+ */
 export async function deleteImageAction(imageUrl: string) {
-  // Enforce session check
   const session = await getSession();
   if (!session) {
     return { success: false, error: "Unauthorized access." };
@@ -85,31 +73,21 @@ export async function deleteImageAction(imageUrl: string) {
   }
 
   try {
-    // Only delete if it belongs to our R2 bucket CDN URL
-    const publicUrlBase = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "";
-    const sanitizedUrlBase = publicUrlBase.replace(/\/+$/, "").replace(/^https?:\/\//, "");
-    const cleanImageUrl = imageUrl.replace(/^https?:\/\//, "");
-
-    if (!cleanImageUrl.includes(sanitizedUrlBase)) {
-      // If it's a local fallback path (/captures/...) or external URL, skip deletion from R2
-      return { success: true, message: "Skipping R2 deletion for non-R2 asset." };
+    let parsedUrl: URL;
+    try {
+      parsedUrl = new URL(imageUrl);
+    } catch {
+      return { success: true, message: "Skipping deletion for non-URL asset." };
     }
 
-    // Extract the filename (Key) from the URL path
-    const secureFileName = imageUrl.split("/").pop();
-    if (!secureFileName) {
-      return { success: false, error: "Could not parse filename from URL." };
+    if (!parsedUrl.hostname.endsWith(".public.blob.vercel-storage.com")) {
+      return { success: true, message: "Skipping deletion for non-Vercel Blob asset." };
     }
 
-    const command = new DeleteObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME || "",
-      Key: secureFileName,
-    });
-
-    await r2Client.send(command);
+    await del(imageUrl);
     return { success: true };
   } catch (error) {
-    console.error("Cloudflare R2 Delete error:", error);
-    return { success: false, error: "Failed to remove image from Cloudflare R2." };
+    console.error("Vercel Blob Delete error:", error);
+    return { success: false, error: "Failed to remove image from Vercel Blob." };
   }
 }
