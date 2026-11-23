@@ -21,9 +21,9 @@ export default function Hero() {
           src={SITE_MEDIA.hero}
           alt="Wildlife Background"
           fill
+          sizes="100vw"
           className="object-cover opacity-60 object-[15%_10%] md:object-center"
           priority
-          unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50  to-black/60" />
       </motion.div>

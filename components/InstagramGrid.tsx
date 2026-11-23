@@ -46,8 +46,8 @@ export default function InstagramGrid() {
               src={src}
               alt="Instagram Post Placeholder"
               fill
+              sizes="(max-width: 768px) 50vw, 25vw"
               className="object-cover transition-transform duration-700 group-hover:scale-110"
-              unoptimized
             />
 
             {/* Hover overlay with Instagram Icon */}

@@ -77,8 +77,8 @@ export default function ExperienceScroll({
                 src={tour.image}
                 alt={tour.title}
                 fill
+                sizes="(max-width: 768px) 85vw, (max-width: 1024px) 60vw, 45vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                unoptimized
               />
               {/* Dark overlay specifically behind text for readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />

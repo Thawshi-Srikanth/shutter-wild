@@ -112,7 +112,6 @@ export default function LightboxGallery({
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 50vw, 33vw"
-                unoptimized
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                 <span className="text-white opacity-0 group-hover:opacity-100 text-sm font-medium tracking-widest uppercase transition-opacity">
@@ -173,9 +172,8 @@ export default function LightboxGallery({
                     alt={`${tourTitle} full gallery image ${activeIndex + 1}`}
                     fill
                     className="object-contain"
-                    sizes="100vw"
+                    sizes="90vw"
                     priority
-                    unoptimized
                   />
                 </motion.div>
               </AnimatePresence>

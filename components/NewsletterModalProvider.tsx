@@ -99,8 +99,8 @@ export function NewsletterModalProvider({ children }: { children: ReactNode }) {
                   src={SITE_MEDIA.newsletterModal}
                   alt="Wildlife Newsletter"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
-                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#1A1A1A] via-transparent to-transparent opacity-90 md:opacity-60" />
               </div>

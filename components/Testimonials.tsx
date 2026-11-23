@@ -46,8 +46,8 @@ export default function Testimonials() {
             src={SITE_MEDIA.testimonials}
             alt="Sophia Martinez"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
-            unoptimized
           />
         </div>
       </div>

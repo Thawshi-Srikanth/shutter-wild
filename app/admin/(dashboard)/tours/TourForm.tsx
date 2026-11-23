@@ -63,7 +63,7 @@ const BannerPreview = memo(({ image }: { image: string }) => {
         alt="Banner Preview"
         width={1200}
         height={600}
-        unoptimized
+        sizes="(max-width: 768px) 100vw, 800px"
         className="object-cover w-full h-full transition-opacity duration-300"
         onError={(e) => {
           (e.target as HTMLElement).style.display = "none";
@@ -89,10 +89,10 @@ const GalleryGrid = memo(({ gallery, onRemove }: { gallery: string[]; onRemove: 
           <Image
             src={path}
             alt=""
-            width={400}
-            height={300}
-            unoptimized
-            className="object-cover w-full h-full transition-opacity duration-300"
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
+            quality={70}
+            className="object-cover transition-opacity duration-300"
           />
           <button
             type="button"
@@ -993,10 +993,9 @@ export default function TourForm({ initialData }: TourFormProps) {
                     <Image
                       src={image}
                       alt="Cover Preview"
-                      width={1200}
-                      height={600}
-                      unoptimized
-                      className="object-cover w-full h-full transition-opacity duration-300"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 900px"
+                      className="object-cover transition-opacity duration-300"
                     />
                     {/* Hover state */}
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 text-white">

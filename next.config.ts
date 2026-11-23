@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   },
   // Allow access to remote image placeholder and Vercel Blob storage.
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: 'https',

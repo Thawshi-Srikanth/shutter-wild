@@ -16,8 +16,8 @@ export default function Footer() {
           src={SITE_MEDIA.footer}
           alt="Footer Background"
           fill
+          sizes="100vw"
           className="object-cover"
-          unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent" />
       </div>

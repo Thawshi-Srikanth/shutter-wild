@@ -13,8 +13,8 @@ export default function About() {
             src={SITE_MEDIA.about}
             alt="Photographer in the wild"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
-            unoptimized
           />
         </div>
 

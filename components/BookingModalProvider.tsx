@@ -119,8 +119,8 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
                   src={SITE_MEDIA.bookingModal}
                   alt="Booking nature background"
                   fill
+                  sizes="40vw"
                   className="object-cover"
-                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-12 left-12 right-12 text-white">

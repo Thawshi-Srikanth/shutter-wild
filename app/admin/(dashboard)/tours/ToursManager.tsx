@@ -119,8 +119,9 @@ export default function ToursManager({
                         src={tour.image}
                         alt={tour.title}
                         fill
+                        sizes="80px"
+                        quality={70}
                         className="object-cover"
-                        unoptimized
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-300">

@@ -152,9 +152,9 @@ export default async function TourPage({
           src={tour.image}
           alt={tour.title}
           fill
+          sizes="100vw"
           className="object-cover"
           priority
-          unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 

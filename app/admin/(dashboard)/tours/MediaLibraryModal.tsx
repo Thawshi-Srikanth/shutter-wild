@@ -26,6 +26,7 @@ export default function MediaLibraryModal({
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | "tours" | "site">("all");
   const [selected, setSelected] = useState<string[]>([]);
+  const [visibleCount, setVisibleCount] = useState(30);
 
   const loadImages = async () => {
     setLoading(true);
@@ -46,12 +47,22 @@ export default function MediaLibraryModal({
   };
 
   useEffect(() => {
-    if (open) {
-      setSelected([]);
-      setSearch("");
-      loadImages();
-    }
+    if (!open) return;
+    setSelected([]);
+    setSearch("");
+    setVisibleCount(30);
+    loadImages();
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
   }, [open]);
+
+  useEffect(() => {
+    setVisibleCount(30);
+  }, [filter, search]);
 
   const filteredBlobs = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -83,7 +94,13 @@ export default function MediaLibraryModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
+    <div
+      data-lenis-prevent
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overscroll-contain"
+    >
       <div className="bg-white w-full max-w-5xl max-h-[85vh] rounded-sm shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-[#F4F4F0]">
@@ -163,7 +180,10 @@ export default function MediaLibraryModal({
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div
+          data-lenis-prevent
+          className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6"
+        >
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-sm">
               {error}
@@ -182,56 +202,70 @@ export default function MediaLibraryModal({
               No matching images found in your media library.
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-              {filteredBlobs.map((blob) => {
-                const isSelected = selected.includes(blob.url);
-                const isAlreadyUsed = alreadySelected.includes(blob.url);
-                return (
+            <div className="space-y-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                {filteredBlobs.slice(0, visibleCount).map((blob) => {
+                  const isSelected = selected.includes(blob.url);
+                  const isAlreadyUsed = alreadySelected.includes(blob.url);
+                  return (
+                    <button
+                      key={blob.url}
+                      type="button"
+                      onClick={() => toggleSelection(blob.url)}
+                      onDoubleClick={() => {
+                        if (mode === "single") {
+                          onSelect([blob.url]);
+                          onClose();
+                        }
+                      }}
+                      className={`group relative aspect-[4/3] bg-gray-100 rounded-sm overflow-hidden border-2 text-left transition-all cursor-pointer ${
+                        isSelected
+                          ? "border-[#1E2E22] ring-2 ring-[#1E2E22]/30"
+                          : "border-gray-200 hover:border-gray-400"
+                      }`}
+                    >
+                      <Image
+                        src={blob.url}
+                        alt={blob.pathname}
+                        fill
+                        sizes="(max-width: 640px) 45vw, (max-width: 1024px) 25vw, 200px"
+                        quality={70}
+                        className="object-cover"
+                      />
+
+                      {isSelected && (
+                        <div className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-[#1E2E22] text-white flex items-center justify-center shadow-md">
+                          <Check size={14} />
+                        </div>
+                      )}
+
+                      {isAlreadyUsed && !isSelected && (
+                        <div className="absolute top-1.5 left-1.5 bg-black/75 text-white px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-xs">
+                          In Use
+                        </div>
+                      )}
+
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-2 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-[10px] text-white truncate">
+                          {blob.pathname}
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {filteredBlobs.length > visibleCount && (
+                <div className="flex justify-center pt-2">
                   <button
-                    key={blob.url}
                     type="button"
-                    onClick={() => toggleSelection(blob.url)}
-                    onDoubleClick={() => {
-                      if (mode === "single") {
-                        onSelect([blob.url]);
-                        onClose();
-                      }
-                    }}
-                    className={`group relative aspect-[4/3] rounded-sm overflow-hidden border-2 text-left transition-all cursor-pointer ${
-                      isSelected
-                        ? "border-[#1E2E22] ring-2 ring-[#1E2E22]/30"
-                        : "border-gray-200 hover:border-gray-400"
-                    }`}
+                    onClick={() => setVisibleCount((prev) => prev + 30)}
+                    className="px-5 py-2 border border-gray-300 bg-white hover:bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-700 rounded-sm transition-colors cursor-pointer"
                   >
-                    <Image
-                      src={blob.url}
-                      alt={blob.pathname}
-                      width={320}
-                      height={240}
-                      unoptimized
-                      className="object-cover w-full h-full"
-                    />
-
-                    {isSelected && (
-                      <div className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-[#1E2E22] text-white flex items-center justify-center shadow-md">
-                        <Check size={14} />
-                      </div>
-                    )}
-
-                    {isAlreadyUsed && !isSelected && (
-                      <div className="absolute top-1.5 left-1.5 bg-black/75 text-white px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-xs">
-                        In Use
-                      </div>
-                    )}
-
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-2 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <p className="text-[10px] text-white truncate">
-                        {blob.pathname}
-                      </p>
-                    </div>
+                    Load More ({filteredBlobs.length - visibleCount} remaining)
                   </button>
-                );
-              })}
+                </div>
+              )}
             </div>
           )}
         </div>
